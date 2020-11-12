@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to contribute to physiopy &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Physiopy Code of Conduct" href="conduct.html" />
+    <link rel="prev" title="Contributing to physiopy" href="contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aims">Aims of <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#joining-the-conversation">Joining the conversation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributiontypes">Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#smalldocs">Contributing with small documentation changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usertests">Contributing with User testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testfile">Contributing with test files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting">Contributing documentation through GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code">Contributing code through GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contributing-with-pull-requests-reviews">Contributing with Pull Requests Reviews</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#issuesmilestones">Issues and Milestones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#labeltypes">Labels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#issue-pr-labels">Issue &amp; PR labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issue-only-labels">Issue-only labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pr-only-labels">PR-only labels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labels-for-semantic-release-and-changelogs">Labels for semantic release and changelogs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-labels">Other labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#g1i">Good First Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow">Contribution workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pr">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reviewing">Reviewing PRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main-reviewer">Main reviewer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#styling">Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Automatic Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recognising-contributors">Recognising contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/contributorfile.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-contribute-to-physiopy">
+<span id="contributorfile"></span><h1>How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code><a class="headerlink" href="#how-to-contribute-to-physiopy" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> organisation! It’s great news that you’re thinking about contributing!</p>
+<p>Working with many people from many different places is great, but sometimes this means that code can become messy due to the many different ways a contribution can be made. For this reason, we have set up some guidelines for contributions - to help you get involved ASAP!
+If you lack knowledge in python development / github use / physiological data handling, don’t be scared! Try to jump in anyway. Most of the original contributors learned these things exactly this way - jumping in and hoping to fall in the right way without breaking too many bones.
+Do you want to jump in but don’t exactly know where/how? You can drop a few lines in <a class="reference external" href="https://gitter.im/phys2bids/community">gitter</a>, so we can help you find something that suits you!
+Already know what you’re looking for in this guide? Jump to the following sections:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#aims">Aims of physiopy</a></p></li>
+<li><p><a class="reference external" href="#joinconvo">Join the conversation</a></p></li>
+<li><dl class="simple">
+<dt><a class="reference external" href="#contributiontypes">Contributions</a></dt><dd><ul>
+<li><p><a class="reference external" href="#smalldocs">Contributing with small documentation changes</a></p></li>
+<li><p><a class="reference external" href="#usertests">Contributing with User testing</a></p></li>
+<li><p><a class="reference external" href="#testfile">Contributing with test files</a></p></li>
+<li><p><a class="reference external" href="#documenting">Contributing documentation through GitHub</a></p></li>
+<li><p><a class="reference external" href="#code">Contributing code through GitHub</a></p></li>
+<li><p><a class="reference external" href="#reviews">Contributing with Pull Requests Review</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="#issuesmilestones">Issues and Milestones</a></p></li>
+<li><dl class="simple">
+<dt><a class="reference external" href="#labeltypes">Labels</a></dt><dd><ul>
+<li><p><a class="reference external" href="#issueprlabels">Issues &amp; PRs labels</a></p></li>
+<li><p><a class="reference external" href="#issuelabel">Issues labels</a></p></li>
+<li><p><a class="reference external" href="#prlabel">PRs labels</a></p></li>
+<li><p><a class="reference external" href="#g1i">Good First Issues</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="#workflow">Contribution workflow</a></p></li>
+<li><p><a class="reference external" href="#pr">Pull Requests</a></p></li>
+<li><p><a class="reference external" href="#reviewing">Reviewing PRs</a></p></li>
+<li><p><a class="reference external" href="#styling">Style Guide</a></p></li>
+<li><p><a class="reference external" href="#testing">Automatic Testing</a></p></li>
+<li><p><a class="reference external" href="#recognising">Recognizing contributors</a></p></li>
+</ul>
+<div class="section" id="aims">
+<span id="id1"></span><h2>Aims of <code class="docutils literal notranslate"><span class="pre">physiopy</span></code><a class="headerlink" href="#aims" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">physiopy</span></code> is a <strong>very</strong> young project developed by a bunch of researchers from the two different sides of the Atlantic Ocean (for now).
+Our main goal is to help collect, analyse and share physiological data, interfacing with (MRI) neuroimaging. We’re trying to do so by:</p>
+<ol class="arabic simple">
+<li><p>Writing packages to make a user-friendly pipeline to deal with physiological data.</p></li>
+<li><p>Writing packages that take into account the use of this physiological data in combination with neuroimaging (MRI) analysis.</p></li>
+<li><p>Providing documentation containing tips and strategies on how to collect such data and use our packages.</p></li>
+<li><p>Help set a standard for these data, albeit without forcing users to use it.</p></li>
+<li><p>Be an excuse for educational purposes on topics like Git/GitHub, Python3, physiology and related tools/topics.</p></li>
+</ol>
+</div>
+<div class="section" id="joining-the-conversation">
+<span id="joinconvo"></span><h2>Joining the conversation<a class="headerlink" href="#joining-the-conversation" title="Permalink to this headline">¶</a></h2>
+<p>We’re trying to keep all conversation related to project development in GitHub <a class="reference external" href="https://github.com/physiopy/phys2bids/issues">issues</a>.
+We maintain a <a class="reference external" href="https://gitter.im/physiopy/community">gitter chat room</a> for more informal conversations and general project updates.
+We also have a dev call once a month - specifically the second Thursday of the month! If you want to participate, drop a line in gitter!
+When interacting in the common channels, please adhere to our <a class="reference external" href="conduct.html">code of conduct</a>.</p>
+</div>
+<div class="section" id="contributiontypes">
+<span id="id2"></span><h2>Contributions<a class="headerlink" href="#contributiontypes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="smalldocs">
+<span id="id3"></span><h3>Contributing with small documentation changes<a class="headerlink" href="#smalldocs" title="Permalink to this headline">¶</a></h3>
+<p>If you are new to GitHub and just have a small documentation change recommendation (such as: typos detection, small improvements in the content, …), please open an issue in the relative project, and label it with the “Documentation” label.
+Chances are those types of changes are easily doable with GitHub’s online editor, which means you can do them, or ask for help from the developers!</p>
+</div>
+<div class="section" id="usertests">
+<span id="id4"></span><h3>Contributing with User testing<a class="headerlink" href="#usertests" title="Permalink to this headline">¶</a></h3>
+<p>Another, non-coding friendly way to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> is by testing the packages.
+There are different kinds of tests, but to simplify things you can think mainly about automatic tests and user tests.
+To know more about <strong>Automatic tests</strong>, you can read the <a class="reference external" href="#testing">testing section</a>.
+<strong>User testing</strong> are warm, human, emotional and opinionated tests that not only check that the code is doing what it needs to do, but also whether there’s a better way to do it - namely better reports, clearer screen outputs, warnings and exceptions, unexpected bugs that have to be corrected.
+If you want to perform one, open an issue on GitHub or drop a comment in Gitter, refer to this <a class="reference external" href="https://docs.google.com/document/d/1b6wc7JVDs3vi-2IqGg_Ed_oWKbZ6siboAJHf55nodKo/edit?usp=sharing">blueprint</a> and don’t be afraid to ask questions!</p>
+</div>
+<div class="section" id="testfile">
+<span id="id5"></span><h3>Contributing with test files<a class="headerlink" href="#testfile" title="Permalink to this headline">¶</a></h3>
+<p>At <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> we always try to imagine and support every possible setting out there. However, our imagination has a limit - but if you think our packages should process a specific format/setting that you have, we’re more than glad to do so!
+To make it happen, we need an example of the file we want to process, so you will have to share it with us (and the rest of the world)! The contribution can be a full file of data that you already acquired, a part of that file (pay attention to what is the minimum you need to share!), or mock data.
+The file contribution should come with a json file of the same name that contains the necessary information to run <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> on that file contribution. There is a <a class="reference external" href="https://mfr.de-1.osf.io/render?url=https://osf.io/jrnxv/?direct%26mode=render%26action=download%26mode=render">json blueprint in OSF</a>, you can download it and adapt it. Note that the frequency list <strong>has to be expressed in Hz</strong> as an integer or float.
+To contribute with a test file, open an Issue in GitHub and label it with <em>Test</em>. We’ll help you add the file in our
+<a class="reference external" href="https://osf.io/3txqr/">OSF</a> space.
+We’re extremely grateful for this type of contribution - so grateful that we asked allcontributors to add a dedicated category!</p>
+</div>
+<div class="section" id="documenting">
+<span id="id6"></span><h3>Contributing documentation through GitHub<a class="headerlink" href="#documenting" title="Permalink to this headline">¶</a></h3>
+<p>We use <a class="reference external" href="https://readthedocs.org/">readthedocs</a> to create our documentation. Every contribution is welcome and it follows the same steps as a code contribution, explained below.</p>
+</div>
+<div class="section" id="code">
+<span id="id7"></span><h3>Contributing code through GitHub<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<p>This section covers 90% of the contributions a project like <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> receives - code, documentation and tests.
+The best way to make this kind of contribution, in a nutshell, is to:
+1. Open an issue with the intended modifications.
+2. Label it, discuss it, (self-)assign it.
+3. Open a Pull Request (PR) to resolve the issue and label it.
+4. Wait for a review, discuss it or comply, repeat until ready.
+Issues and PR chats are great to maintain track of the conversation on the contribution. They are based upon GitHub-flavoured <a class="reference external" href="https://daringfireball.net/projects/markdown">Markdown</a>. GitHub has a helpful page on <a class="reference external" href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github">getting started with writing and formatting Markdown on GitHub</a>.</p>
+</div>
+<div class="section" id="contributing-with-pull-requests-reviews">
+<span id="reviews"></span><h3>Contributing with Pull Requests Reviews<a class="headerlink" href="#contributing-with-pull-requests-reviews" title="Permalink to this headline">¶</a></h3>
+<p>A big challenge of software development is merging code accurately without having to wait too much time.
+For this reason, Reviewers for PRs are more than welcome! It is a task that requires some experience, but it’s very necessary!
+Read the <a class="reference external" href="#reviewing">related section below</a> to start!</p>
+</div>
+</div>
+<div class="section" id="issuesmilestones">
+<span id="id8"></span><h2>Issues and Milestones<a class="headerlink" href="#issuesmilestones" title="Permalink to this headline">¶</a></h2>
+<p>At <code class="docutils literal notranslate"><span class="pre">physiopy</span></code>, we use Issues and Milestones to keep track of and organise our workflow.
+- <strong>Issues</strong> describe pieces of work that need to be completed to move the project forwards. We try to keep them as simple and clear as possible: an issue should describe a unitary, possibly small piece of work (unless it’s about refactoring). Don’t be scared of opening many issues at once, if it makes sense! Just check that what you’re proposing is not listed in a previous issue (open or closed) yet - we don’t like doubles. Issues get labelled. That helps the contributors to know what they’re about. Check the label list to know what types are there, and use them accordingly! Issues can also be <strong>assigned</strong>. If you want to work on an assigned issue, ask permission first!
+- <strong>Milestones</strong> set the higher level workflow. They sketch deadlines and important releases. Issues are assigned to these milestones by the maintainers. If you feel that an issue should be assigned to a specific milestone but the maintainers have not done so, discuss it in the issue chat or in Gitter! We might have just missed it, or we might not (yet) see how it aligns with the overall project structure/milestone.</p>
+</div>
+<div class="section" id="labeltypes">
+<span id="id9"></span><h2>Labels<a class="headerlink" href="#labeltypes" title="Permalink to this headline">¶</a></h2>
+<p>The current list of labels are <a class="reference external" href="https://github.com/physiopy/phys2bids/labels">here</a>. They can be used for <strong>Issues</strong>, <strong>PRs</strong>, or both.
+We use <a class="reference external" href="https://github.com/intuit/auto">auto</a> to automate our semantic versioning and Pypi upload, so <strong>it’s extremely important to use the right PR labels</strong>!</p>
+<div class="section" id="issue-pr-labels">
+<span id="issueprlabels"></span><h3>Issue &amp; PR labels<a class="headerlink" href="#issue-pr-labels" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Documentation: Improvements or additions to documentation. This category includes (but is not limited to) docs pages, docstrings, and code comments.</p></li>
+<li><p>Duplicate: Whatever this is, it exists already! Maybe it’s a closed Issue/PR, that should be reopened.</p></li>
+<li><p>Enhancement: New features added or requested. This normally goes with a <code class="docutils literal notranslate"><span class="pre">minormod</span></code> label for PRs.</p></li>
+<li><p>Outreach: As part of the scientific community, we care about outreach. Check the relevant section about it, but know that this Issue/PR contains information or tasks about abstracts, talks, demonstrations, papers.</p></li>
+<li><p>Paused: Issue or PR should not be worked on until the resolution of other issues or PRs.</p></li>
+<li><p>Testing: This is for testing features, writing tests or producing testing code. Both user testing and CI testing!</p></li>
+<li><p>Urgent: If you don’t know where to start, start here! This is probably related to a milestone due soon!</p></li>
+</ul>
+</div>
+<div class="section" id="issue-only-labels">
+<span id="issuelabel"></span><h3>Issue-only labels<a class="headerlink" href="#issue-only-labels" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Bug: Something isn’t working. It either breaks the code or has an unexpected outcome.</p></li>
+<li><p>Community: This issue contains information about the <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> community (e.g. the next developer call)</p></li>
+<li><p>Discussion: Discussion of a concept or implementation. These Issues are prone to be open ad infinitum. Jump in the conversation if you want!</p></li>
+<li><p>Good first issue: Good for newcomers. These issues calls for a <strong>fairly</strong> easy enhancement, or for a change that helps/requires getting to know the code better. They have educational value, and for this reason, unless urgent, experts in the topic should refrain from closing them - but help newcomers closing them.</p></li>
+<li><p>Hacktoberfest: Dedicated to the hacktoberfest event, so that people can help and feel good about it (and show it with a T-shirt!). <strong>Such commits will not be recognised in the all-contributor table, unless otherwise specified</strong>.</p></li>
+<li><p>Help wanted: Extra attention is needed here! It’s a good place to have a look!</p></li>
+<li><p>Refactoring: Improve nonfunctional attributes. Which means rewriting the code or the documentation to improve performance or just because there’s a better way to express those lines. It might create a <code class="docutils literal notranslate"><span class="pre">majormod</span></code> PR.</p></li>
+<li><p>Question: Further information is requested, from users to developers. Try to respond to this!</p></li>
+<li><p>Wontfix: This will not be worked on, until further notice.</p></li>
+</ul>
+</div>
+<div class="section" id="pr-only-labels">
+<span id="prlabel"></span><h3>PR-only labels<a class="headerlink" href="#pr-only-labels" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="labels-for-semantic-release-and-changelogs">
+<h4>Labels for semantic release and changelogs<a class="headerlink" href="#labels-for-semantic-release-and-changelogs" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Majormod: These PRs call for a new major release (+1.0.0). This means that the PR is breaking backward compatibility.</p></li>
+<li><p>Minormod: These PRs call for a new minor release (0.+1.0). This means that the PR is <strong>not</strong> breaking backward compatibility.</p></li>
+<li><p>BugFIX: These PRs close an issue labelled <code class="docutils literal notranslate"><span class="pre">bug</span></code>. They also increase the semantic versioning for fixes (+0.0.1).</p></li>
+<li><p>Internal: This PR contains changes to the internal API. It won’t trigger a release, but it will be reported in the changelog.</p></li>
+<li><p>Documentation: See above. This PR won’t trigger a release, but it will be reported in the changelog.</p></li>
+<li><p>Testing: See above. This PR won’t trigger a release, but it will be reported in the changelog.</p></li>
+<li><p>Skip release: This PR will <strong>not</strong> trigger a release.</p></li>
+<li><p>Release: This PR will force the trigger of a release.</p></li>
+</ul>
+</div>
+<div class="section" id="other-labels">
+<h4>Other labels<a class="headerlink" href="#other-labels" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Invalid: These PRs don’t seem right. They actually seem so not right that they won’t be further processed. This label invalidates a Hacktoberfest contribution. If you think this is wrong, start a discussion in the relevant issue (or open one if missing). Reviewers are asked to give an explanation for the use of this label.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="g1i">
+<span id="id10"></span><h3>Good First Issues<a class="headerlink" href="#g1i" title="Permalink to this headline">¶</a></h3>
+<p>Good First Issues are issues that are either very simple, or that help the contributor get to know the programs or the languages better. We use it to help contributors with less experience to learn and familiarise with Git, GitHub, Python3, and physiology.
+We invite more expert contributors to avoid those issues, leave them to beginners and possibly help them out in the resolution of the issue. However, if the issue is left unassigned or unattended for long, and it’s considered important or urgent, anyone can tackle it.</p>
+</div>
+</div>
+<div class="section" id="workflow">
+<span id="id11"></span><h2>Contribution workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
+<p>There are many descriptions of a good contribution workflow out there. For instance, we suggest to have a look at <a class="reference external" href="https://github.com/ME-ICA/tedana/blob/master/CONTRIBUTING.md#making-a-change">tedana’s workflow</a>.
+At <code class="docutils literal notranslate"><span class="pre">physiopy</span></code>, we follow a very similar workflow. The only three differences are:</p>
+<ul class="simple">
+<li><p>If you see an open issue that you would like to work on, check if it is assigned. If it is, ask the assignee if they need help or want to be substituted before starting to work on it.</p></li>
+<li><p>We ask you to test the code locally before merging it, and then, if possible, write some automatic tests for the code to be run in our Continuous Integration! Check the testing section below to know more.</p></li>
+<li><p>We suggest opening a draft PR as soon as you can - so it’s easier for us to help you!</p></li>
+</ul>
+</div>
+<div class="section" id="pr">
+<span id="id12"></span><h2>Pull Requests<a class="headerlink" href="#pr" title="Permalink to this headline">¶</a></h2>
+<p>To improve understanding pull requests “at a glance” and use the power of <code class="docutils literal notranslate"><span class="pre">auto</span></code>, we use the labels listed above. Multiple labels can be assigned to a PR - in fact, all those that you think are relevant.
+We strongly advise to keep the changes you’re introducing with your PR limited to your original goal. Adding to the scope of your PR little style corrections or code refactoring here and there in the code that you’re already modifying is a great help, but when they become too much (and they are not relevant to your PR) they risk complicating the nature of the PR and the reviewing process. It is much better to open another PR with the objective of doing such corrections!
+Moreover, if you’re tempted to assign more than one label that would trigger a release (e.g. <cite>bug</cite> and <cite>minormod</cite>, or <cite>bug</cite> and <cite>majormod</cite>, etc. etc.), you might want to split your PR instead.
+When opening a pull request, assign it at least one label.</p>
+<p>We encourage you to open a PR as soon as possible - even before you finish working on them. This is useful especially to you - so that you can receive comments and suggestions early on, rather than having to process a lot of comments in the final review step!
+However, if it’s an incomplete PR, please open a <strong>Draft PR</strong>. That helps us process PRs by knowing which one to have a look first - and how picky to be when doing so.</p>
+<p>Reviewing PRs is a time consuming task and it can be stressful for both the reviewer and the author. Avoiding wasting time and the need of little fixes - such as fixing grammar mistakes and typos, styling code, or adopting conventions - is a good start for a successful (and quick) review. Before graduating a Draft PR to a PR ready for review, please check that:</p>
+<ul class="simple">
+<li><p>You did all you wanted to include in your PR. If at a later stage you realise something is missing and it’s not a minor thing, you will need to open a new PR.</p></li>
+<li><p>If your contribution contains code or tests, you ran and passed all of the tests locally with <cite>pytest</cite>.</p></li>
+<li><p>If you’re writing documentation, you built it locally with <cite>sphinx</cite> and the format is what you intended.</p></li>
+<li><p>Your code is harmonious with the rest of the code - no repetitions of any sort!</p></li>
+<li><dl class="simple">
+<dt>Your code respects the <a class="reference external" href="#styling">adopted Style</a>, especially:</dt><dd><ul>
+<li><p>Your code is lintered adequately and respects the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> convention.</p></li>
+<li><p>Your docstrings follow the <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc</a> convention.</p></li>
+<li><p>There are no typos or grammatical mistakes and the text is fluid.</p></li>
+<li><p>The code is sufficiently commented and the comments are clear.</p></li>
+<li><p>Your PR title is clear enough to be meaningful when appended to the version changelog.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>You have the correct labels.</p></li>
+</ul>
+<p>To be merged, PRs have to:</p>
+<ol class="arabic simple">
+<li><p>Pass all the CircleCI tests, and possibly all the codecov checks.</p></li>
+<li><p>Have the necessary amount of approving reviews, even if you’re a long time contributor. You can ask one (or more) contributor to do that review, if you think they align more with the content of your PR. You need <strong>one</strong> review for documentation, tests, and small changes, and <strong>two</strong> reviews for bugs, refactoring and enhancements.</p></li>
+<li><p>Have at least a release-related label (or a <cite>Skip release</cite> label).</p></li>
+<li><p>Have a short title that clearly explains in one sentence the aim of the PR.</p></li>
+<li><p>Contain at least a unit test for your contribution, if the PR contains code (it would be better if it contains an integration or function test and all the breaking tests necessary). If you’re not confident about writing tests, it is possible to refer to an issue that asks for the test to be written, or another (Draft) PR that contains the tests required.</p></li>
+</ol>
+<p>As we’re trying to maintain at least 90% code coverage, you’re strongly encouraged to write all of the tests necessary to keep coverage above that threshold. If coverage drops too low, you might be asked to add more tests and/or your PR might be rejected. See the <a class="reference external" href="#testing">Automatic Testing</a> section.</p>
+<p>Don’t merge your own pull request! That’s a task for the main reviewer of your PR or the project manager. Remember that the project manager doesn’t have to be a reviewer of your PR!</p>
+</div>
+<div class="section" id="reviewing">
+<span id="id14"></span><h2>Reviewing PRs<a class="headerlink" href="#reviewing" title="Permalink to this headline">¶</a></h2>
+<p>Reviewing PRs is an extremely important task in collaborative development.
+In fact, it is probably the task that requires the most time in the development, and it can be stressful for both the reviewer and the author.
+Remember that, as a PR Reviewer, you are guaranteeing that the changes work and integrate well with the rest of the repository, hence <strong>you are responsible for the quality of the repository and its next version release</strong>.
+If they don’t integrate well, later PR reviewers might have to ask for broader changes than expected.
+There are many best practices to review code online, for instance <a class="reference external" href="https://medium.com/an-idea/the-code-review-guide-9e793edcd683">this one</a>, but here are some good rules of thumbs that we need to follow while reviewing PRs:</p>
+<ul class="simple">
+<li><p>Be respectful to the PR authors and be clear in what you are asking/suggesting - remember that, like you, they are contributing their spare time and doing their best job!</p></li>
+<li><p>If there is a Draft PR, you can comment on its development in the message board or making “Comment” reviews. Don’t ask for changes, and especially, <strong>don’t approve the PR</strong></p></li>
+<li><p>If the PR graduated from Draft to full PR, check that it follows the sections <a class="reference external" href="#pr">Pull requests</a> and <a class="reference external" href="#styling">Style Guide</a> of these guidelines. If not, invite the author to do so before starting a review.</p></li>
+<li><p><strong>Don’t limit your review to the parts that are changed</strong>. Look at the entire file, see if the changes fit well in it, and see if the changes are properly addressed everywhere in the code - in the documentation, in the tests, and in other functions. Sometimes the differences reported don’t show the full impact of the PR in the repository!</p></li>
+<li><p>If your want to make Pull Requests an educational process, invite the author of the PR to make changes before actually doing them yourself. Request changes via comments or in the message board or by checking out the PR locally, making changes and then submitting a PR to the author’s branch.</p></li>
+<li><p>If you decide to use the suggestion tool in reviews, or to start a PR to the branch under review, please alert the Project Manager. Bots might automatically assign you contribution types that will have to be removed (remember, your contribution in this case is “Reviewer”). Instead of starting a PR to the branch under review, think about opening a new PR with those modifications (unless they are needed to pass tests), and alert the Main Reviewer. In any case <strong>don’t commit directly to the branch under review</strong>!</p></li>
+<li><p>If you’re reviewing documentation, build it locally with <code class="docutils literal notranslate"><span class="pre">sphinx</span></code>.</p></li>
+<li><p>If you’re asking for changes, <strong>don’t approve the PR</strong>. Approve it only after everything was sufficiently addressed. Someone else might merge the PR in taking your word for granted.</p></li>
+<li><p>If you are the main reviewer, and the last reviewer required to approve the PR, merge the PR!</p></li>
+</ul>
+<p>Before approving and/or merging PRs, be sure that:</p>
+<ul class="simple">
+<li><p>All the tests in CircleCI/Azure pass without errors.</p></li>
+<li><p>Prefereably, codecov checks pass as well. If they don’t, discuss what to do.</p></li>
+<li><p>The title describes the content of the PR clearly enough to be meaningful on its own - remember that it will appear in the version changelog!</p></li>
+<li><p>The PR has the appropriate labels to trigger the appropriate version release and update the contributors table.</p></li>
+</ul>
+<div class="section" id="main-reviewer">
+<span id="mainreviewer"></span><h3>Main reviewer<a class="headerlink" href="#main-reviewer" title="Permalink to this headline">¶</a></h3>
+<p>At <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> we use the “Assignees” section of a PR to mark the <strong>main reviewer</strong> for that PR. The main reviewer is the primary person responsible <strong>for the quality of the repository and its next version release</strong>, as well as <strong>for the behaviour of the other reviewers</strong>.
+The main reviewer:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Takes care of the reviewing process of the PR, in particular:</dt><dd><ul>
+<li><p>Invites the reviewers to finish their review in a relatively short time.</p></li>
+<li><p>Checks that all elements of this document were respected, especially the part about <a class="reference external" href="#pr">Pull Requests</a>.</p></li>
+<li><p>Invites other Reviewers to respect this document, especially the part about <a class="reference external" href="#reviewing">reviews</a>, helps them in doing so, and checks that they do.</p></li>
+<li><p>If a Reviewer keeps not respecting this document, flags them to the project manager.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Decides what to do in case of a coverage decrease (in <em>codecov/patch</em>).</p></li>
+<li><dl class="simple">
+<dt>In case of missing tests or updates to user documentation:</dt><dd><ul>
+<li><p>Asks for more documentation or tests before approving the PR, <em>or</em></p></li>
+<li><p>Checks that the appropriate issues have been opened to address the lack of documentation or tests (1 issue per item).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Double-checks that the title is clear and the labels are correct to trigger an appropriate <code class="docutils literal notranslate"><span class="pre">auto</span></code> release - feel free to change them.</p></li>
+<li><p><strong>Is the one that is going to merge the PR.</strong></p></li>
+<li><dl class="simple">
+<dt>After the PR has been merged and a new release has been triggered, checks that:</dt><dd><ul>
+<li><p>The documentation was updated correctly (if changed).</p></li>
+<li><p>The Pypi version of the repository coincides with the new release (if changed).</p></li>
+<li><p>New contributors or forms of contributions were correctly added in the README (if changed).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="styling">
+<span id="id19"></span><h2>Style Guide<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h2>
+<p>Docstrings should follow <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc</a> convention. We encourage extensive documentation.
+The python code itself should follow <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> convention whenever possible: there are continuous integration tests checking that!
+You can use linters to help you write your code following style conventions. Linters are add-ons that you can run on the written script file. We suggest the use of <strong>flake8</strong> for Python 3. Many editors (Atom, VScode, Sublimetext, …) support addons for online lintering, which means you’ll see warnings and errors while you write the code - check out if your does!</p>
+<p>Since we adopt <a class="reference external" href="https://intuit.github.io/auto/home.html">auto</a>, the PR title will be automatically reported as part of the changelog when updating versions. Try to describe in one (short) sentence what your PR is about - possibly using the imperative and starting with a capital letter. For instance, a good PR title could be: <code class="docutils literal notranslate"><span class="pre">Implement</span> <span class="pre">support</span> <span class="pre">for</span> <span class="pre">&lt;randomtype&gt;</span> <span class="pre">files</span></code> or <code class="docutils literal notranslate"><span class="pre">Reorder</span> <span class="pre">dictionary</span> <span class="pre">entries</span></code>, rather than <code class="docutils literal notranslate"><span class="pre">&lt;randomtype&gt;</span> <span class="pre">support</span></code> or <code class="docutils literal notranslate"><span class="pre">reorders</span> <span class="pre">keys</span></code>.</p>
+</div>
+<div class="section" id="testing">
+<span id="id23"></span><h2>Automatic Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">physiopy</span></code> uses Continuous Integration (CI) to make life easier. In particular, we use the <a class="reference external" href="https://circleci.com/">CircleCI</a> platform to run automatic testing!
+<strong>Automatic tests</strong> are cold, robotic, emotionless, and opinionless tests that check that the program is doing what it is expected to. They are written by the developers and run (by CircleCI) every time they send a Pull Request to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> repositories. They complement the warm, human, emotional and opinionated <strong>user tests</strong>, as they tell us if a piece of code is failing.
+CircleCI uses <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a> to run the tests. The great thing about it is that you can run it in advance on your local version of the code!
+We can measure the amount of code that is tested with <a class="reference external" href="https://docs.pytest.org/en/latest/">codecov</a>, which is an indication of how reliable our packages are! We try to maintain a 90% code coverage, and for this reason, PR should contain tests!
+The four main type of tests we use are:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Unit tests</dt><dd><p>Unit tests check that a minimal piece of code is doing what it should be doing. Normally this means calling a function with some mock parameters and checking that the output is equal to the expected output. For example, to test a function that adds two given numbers together (1 and 3), we would call the function with those parameters, and check that the output is 4.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Breaking tests</dt><dd><p>Breaking tests are what you expect - they check that the program is breaking when it should. This means calling a function with parameters that are expected <strong>not</strong> to work, and check that it raises a proper error or warning.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Integration tests</dt><dd><p>Integration tests check that the code has an expected output, being blind to its content. This means that if the program should output a new file, the file exists - even if it’s empty. This type of tests are normally run on real data and call the program itself. For instance, documentation PRs should check that the documentation page is produced!</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Functional tests</dt><dd><p>If integration tests and unit tests could have babies, those would be functional tests. In practice, this kind of tests check that an output is produced, and <em>also</em> that it contains what it should contain. If a function should output a new file or an object, this test passes only if the file exists <em>and</em> it is like we expect it to be. They are run on real or mock data, and call the program itself or a function.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="recognising-contributors">
+<span id="recognising"></span><h2>Recognising contributors<a class="headerlink" href="#recognising-contributors" title="Permalink to this headline">¶</a></h2>
+<p>We welcome and recognize <a class="reference external" href="https://allcontributors.org/docs/en/specification">all contributions</a> from documentation to testing to code development. You can see a list of current contributors in the README (kept up to date by the <a class="reference external" href="https://allcontributors.org/docs/en/bot/overview">all contributors bot</a>).</p>
+<p><strong>Thank you!</strong></p>
+<p><em>— Based on contributing guidelines from the `STEMMRoleModels &lt;https://github.com/KirstieJane/STEMMRoleModels&gt;`_ project.</em></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="conduct.html" class="btn btn-neutral float-right" title="Physiopy Code of Conduct" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contributing.html" class="btn btn-neutral float-left" title="Contributing to physiopy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

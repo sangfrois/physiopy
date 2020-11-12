@@ -1,0 +1,12 @@
+phys2bids.physio_obj.BlueprintInput
+===================================
+
+.. currentmodule:: phys2bids.physio_obj
+
+.. autoclass:: BlueprintInput
+   :no-members:
+   :no-inherited-members:
+
+.. raw:: html
+
+    <div style='clear:both'></div>

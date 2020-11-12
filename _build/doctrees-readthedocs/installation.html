@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to use phys2bids" href="howto.html" />
+    <link rel="prev" title="phys2bids" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linux-and-mac-installation">Linux and mac installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-with-pip">Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-phys2bids-alone">Install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> alone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-extra-modules">Install extra modules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-without-pip">Install without <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-your-installation">Check your installation!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windows-installation">Windows installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> requires python 3.6 or above, as well as the modules:</p>
+<p>Depending on the processed files, it might require the <strong>manual installation</strong> of extra modules.
+At the moment, those modules are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/uwmadison-chm/bioread"><code class="docutils literal notranslate"><span class="pre">bioread</span></code></a>, for AcqKnowledge (<code class="docutils literal notranslate"><span class="pre">.acq</span></code>) files.</p></li>
+</ul>
+</div>
+<div class="section" id="linux-and-mac-installation">
+<h2>Linux and mac installation<a class="headerlink" href="#linux-and-mac-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-with-pip">
+<h3>Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#install-with-pip" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following instructions are provided assuming that python 3 is <strong>not</strong> your default version of python.
+If it is, you might need to use <code class="docutils literal notranslate"><span class="pre">pip</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pip3</span></code>, although some OSs do adopt <code class="docutils literal notranslate"><span class="pre">pip3</span></code> anyway.
+If you want to check, type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code> in a terminal.</p>
+</div>
+<div class="section" id="install-phys2bids-alone">
+<h4>Install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> alone<a class="headerlink" href="#install-phys2bids-alone" title="Permalink to this headline">¶</a></h4>
+<p>Pypi has the latest stable release of <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> as a package. Since we use <code class="docutils literal notranslate"><span class="pre">auto</span></code> to publish the latest features as soon as they are ready, it will <em>really</em> be the latest release. Just run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">phys2bids</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-extra-modules">
+<h4>Install extra modules<a class="headerlink" href="#install-extra-modules" title="Permalink to this headline">¶</a></h4>
+<p>If you are planning to use file formats other than plain <code class="docutils literal notranslate"><span class="pre">txt</span></code>, you need to install extra modules to have the right interface.
+Extra modules installation can be done with the syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">phys2bids</span><span class="p">[</span><span class="o">&lt;</span><span class="n">extra</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;extra&gt;</span></code> is one of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">acq</span></code>: if you plan to use native AcqKnowledge files (<code class="docutils literal notranslate"><span class="pre">.acq</span></code> extension)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interfaces</span></code>: for all the interfaces above.</p></li>
+</ul>
+</div></blockquote>
+<p>For instance, if you plan to install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> and use all of the interfaces, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">phys2bids</span><span class="p">[</span><span class="n">interfaces</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you “missed” or skipped this trick when you installed <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> the first time, don’t worry!
+You can do it any time - this will update <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> and install all extra modules you want.</p>
+</div>
+</div>
+</div>
+<div class="section" id="install-without-pip">
+<h3>Install without <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#install-without-pip" title="Permalink to this headline">¶</a></h3>
+<p>Download the latest package release from <a class="reference external" href="https://github.com/physiopy/phys2bids">github</a> and uncompress it.
+Alternatively, if you have <code class="docutils literal notranslate"><span class="pre">git</span></code> installed, use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">physiopy</span><span class="o">/</span><span class="n">phys2bids</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Open a terminal in the <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> folder and execute the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>You might still need to install extra dependencies listed at the beginning of the page.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If python 3 is already your default, you might use <code class="docutils literal notranslate"><span class="pre">python</span></code> rather than <code class="docutils literal notranslate"><span class="pre">python3</span></code></p>
+</div>
+</div>
+<div class="section" id="check-your-installation">
+<h3>Check your installation!<a class="headerlink" href="#check-your-installation" title="Permalink to this headline">¶</a></h3>
+<p>Type the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">phys2bids</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>If your output is: <code class="docutils literal notranslate"><span class="pre">phys2bids</span> <span class="pre">2.2.2</span></code> or similar, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> is ready to be used.</p>
+</div>
+</div>
+<div class="section" id="windows-installation">
+<h2>Windows installation<a class="headerlink" href="#windows-installation" title="Permalink to this headline">¶</a></h2>
+<p>First of all let’s check you have python installed. Open a windows power shell window in <strong>admin mode</strong> and type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>In case you don’t have it, either install it from <a class="reference external" href="https://www.microsoft.com/en-us/p/python-38/9mssztt1n39l?activetab=pivot:overviewtab">here</a> or type the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
+</pre></div>
+</div>
+<p>It will redirect you to the windows store python install (in the creation of this tutorial the newest version of python was 3.8).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> supports Python 3.6 and later versions. We can’t guarantee it will work if you use python 2.</p>
+</div>
+<p>Once python is installed, you can follow the instructions to install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> reported <a class="reference external" href="#install-with-pip">above</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember to open a terminal in <strong>admin mode</strong> to install libraries!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howto.html" class="btn btn-neutral float-right" title="How to use phys2bids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="phys2bids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

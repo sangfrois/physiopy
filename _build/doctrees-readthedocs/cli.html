@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command-line usage &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing to physiopy" href="contributing.html" />
+    <link rel="prev" title="Why use BIDS (for physiological data)?" href="bids.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-line usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-phys2bids-command">The <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> command</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Required Argument:">Required Argument:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Named Arguments">Named Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Command-line usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/cli.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line-usage">
+<span id="cli"></span><h1>Command-line usage<a class="headerlink" href="#command-line-usage" title="Permalink to this headline">¶</a></h1>
+<p>You can invoke the primary workflow of <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> from the command line.</p>
+<div class="section" id="the-phys2bids-command">
+<span id="cli-phys2bids"></span><h2>The <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> command<a class="headerlink" href="#the-phys2bids-command" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">phys2bids</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="ow">in</span> <span class="n">FILENAME</span> <span class="p">[</span><span class="o">-</span><span class="n">info</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">indir</span> <span class="n">INDIR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">outdir</span> <span class="n">OUTDIR</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">heur</span> <span class="n">HEUR_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sub</span> <span class="n">SUB</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">ses</span> <span class="n">SES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">chtrig</span> <span class="n">CHTRIG</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">chsel</span> <span class="p">[</span><span class="n">CHSEL</span> <span class="p">[</span><span class="n">CHSEL</span> <span class="o">...</span><span class="p">]]]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">ntp</span> <span class="p">[</span><span class="n">NUM_TIMEPOINTS_EXPECTED</span> <span class="p">[</span><span class="n">NUM_TIMEPOINTS_EXPECTED</span> <span class="o">...</span><span class="p">]]]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">tr</span> <span class="p">[</span><span class="n">TR</span> <span class="p">[</span><span class="n">TR</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">thr</span> <span class="n">THR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">pad</span> <span class="n">PAD</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">chnames</span> <span class="p">[</span><span class="n">CH_NAME</span> <span class="p">[</span><span class="n">CH_NAME</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">yml</span> <span class="n">YML</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">debug</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">quiet</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="Required Argument:">
+<h3>Required Argument:<a class="headerlink" href="#Required Argument:" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd>-in, --input-file</kbd></dt>
+<dd><p>The name of the file containing physiological data, with or without extension.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="Named Arguments">
+<h3>Named Arguments<a class="headerlink" href="#Named Arguments" title="Permalink to this headline">¶</a></h3>
+<dl class="option-list">
+<dt><kbd>-info, --info</kbd></dt>
+<dd><p>Only output info about the file, don’t process. Default is to process.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>-indir, --input-dir</kbd></dt>
+<dd><p>Folder containing input. Default is current folder.</p>
+<p>Default: “.”</p>
+</dd>
+<dt><kbd>-outdir, --output-dir</kbd></dt>
+<dd><p>Folder where output should be placed. Default is current folder. If “-heur” is used, it’ll become the site folder. Requires “-sub”. Optional to specify “-ses”.</p>
+<p>Default: “.”</p>
+</dd>
+<dt><kbd>-heur, --heuristic</kbd></dt>
+<dd><p>File containing heuristic, with or without extension. This file is needed in order to convert your input file to BIDS format! If no path is specified, it assumes the file is in the current folder. Edit the heur_ex.py file in heuristics folder.</p>
+</dd>
+<dt><kbd>-sub, --subject</kbd></dt>
+<dd><p>Specify alongside “-heur”. Code of subject to process.</p>
+</dd>
+<dt><kbd>-ses, --session</kbd></dt>
+<dd><p>Specify alongside “-heur”. Code of session to process.</p>
+</dd>
+<dt><kbd>-chtrig, --channel-trigger</kbd></dt>
+<dd><p>The column number of the trigger channel. Channel numbering starts with 1. Default is 1.</p>
+<p>Default: 1</p>
+</dd>
+<dt><kbd>-chsel, --channel-selection</kbd></dt>
+<dd><p>The column numbers of  the channels to process. Default is to process all channels.</p>
+</dd>
+<dt><kbd>-ntp, --numtps</kbd></dt>
+<dd><p>Number of expected trigger timepoints (TRs). Default is None. Note: the estimation of beggining of neuroimaging acquisition cannot take place with this default. If you’re running phys2bids on a multi-run recording, give a list of each expected ntp for each run.</p>
+</dd>
+<dt><kbd>-tr, --tr</kbd></dt>
+<dd><p>TR of sequence in seconds. If you’re running phys2bids on a multi-run recording, you can give a list of each expected ntp for each run, or just one TR if it is consistent throughout the session.</p>
+</dd>
+<dt><kbd>-thr, --threshold</kbd></dt>
+<dd><p>Threshold to use for trigger detection. If “ntp” and “TR” are specified, phys2bids automatically computes a threshold to detect the triggers. Use this parameter to set it manually. This parameter is necessary for multi-run recordings.</p>
+</dd>
+<dt><kbd>-pad, --padding</kbd></dt>
+<dd><p>Padding in seconds used around a single run when separating multi-run session files. Default is 9 seconds.</p>
+<p>Default: 9</p>
+</dd>
+<dt><kbd>-chnames, --channel-names</kbd></dt>
+<dd><p>Column header (for json file output).</p>
+<p>Default: []</p>
+</dd>
+<dt><kbd>-yml, --participant-yml</kbd></dt>
+<dd><p>full path to file with info needed to generate participant.tsv file</p>
+<p>Default: “”</p>
+</dd>
+<dt><kbd>-debug, --debug</kbd></dt>
+<dd><p>Only print debugging info to log file. Default is False.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>-quiet, --quiet</kbd></dt>
+<dd><p>Only print warnings to log file. Default is False.</p>
+<p>Default: False</p>
+</dd>
+<dt><kbd>-v, --version</kbd></dt>
+<dd><p>show program’s version number and exit</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing to physiopy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bids.html" class="btn btn-neutral float-left" title="Why use BIDS (for physiological data)?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

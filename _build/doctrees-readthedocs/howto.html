@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to use phys2bids &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to set up a heuristic file" href="heuristic.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-in-the-tutorial-text-file">What is in the tutorial text file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-info-option">Using the -info option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-outputs">Generating outputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-paths-and-names">Specifying paths and names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-the-start-time">Finding the “start time”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#splitting-your-input-file-into-multiple-run-output-files">Splitting your input file into multiple run output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-if-i-have-multiple-acquisition-types">What if I have multiple acquisition types ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-outputs-in-bids-format">Generating outputs in BIDs format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/howto.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-phys2bids">
+<span id="howto"></span><h1>How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code><a class="headerlink" href="#how-to-use-phys2bids" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial uses a text file exported from LabChart software. The principles of this tutorial apply for other inputs that <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> currently supports (AcqKnowledge native files and text files). However, future tutorials will go into the specifics of processing different inputs, as well as inputs which contain different sampling frequencies across data columns and inputs with multiple scans within one file.</p>
+<p>This tutorial will:</p>
+<ol class="arabic simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> with the <code class="docutils literal notranslate"><span class="pre">-info</span></code> option, to show how to retrieve information about your input file.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> and explain the output files that are generated.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> with a heuristic file, showing how the input file can be outputted in BIDS format.</p></li>
+</ol>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>In order to follow the tutorial, you need a very quick setup: download or clone the <a class="reference external" href="https://github.com/physiopy/phys2bids">github repository</a> and install either the latest stable or development release as described <a class="reference external" href="installation.html#install-with-pip">here</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before starting to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code>, check that you have installed all the extra modules that you need, depending on the files you will work with.</p>
+<p>For instance, if you are planning to process AcqKnowledge files, install the interface dependencies as described <a class="reference external" href="installation.html#">here</a>.</p>
+</div>
+<p>For the tutorial, we will assume the repository was downloaded in <code class="docutils literal notranslate"><span class="pre">/home/arthurdent</span></code>. Let’s get there right now and download the tutorial data:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /home/arthurdent
+mkdir test_dir <span class="c1"># create test directory</span>
+<span class="nb">cd</span> test_dir
+<span class="c1"># Download tutorial files, install wget or copy the link to your browser and download manually</span>
+wget https://osf.io/j842e/download -O tutorial_file.txt
+wget https://osf.io/pzfxb/download -O tutorial_file_v2.txt
+<span class="c1"># create output directory</span>
+mkdir physio
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-is-in-the-tutorial-text-file">
+<h2>What is in the tutorial text file?<a class="headerlink" href="#what-is-in-the-tutorial-text-file" title="Permalink to this headline">¶</a></h2>
+<p>This file has header information (first 9 lines) which phys2bids will use to process this file, alongside information directly inputted by the user. Following this header information, the data in the file is stored in a column format. In this example, we have time (column 1), MRI volume trigger pulse (column 2), CO2 (column 3), O2 (column 4) and cardiac pulse (column 5) recordings. Each column was sampled at 1000Hz (Interval = 0.001 s).</p>
+<img alt="tutorial_file_channels" class="align-center" src="_images/tutorial_header.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>time is not a “real” channel recorded by LabChart or AcqKnowledge. For this reason, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> treats it as a hidden channel, always in position 0. Channel 1 will be classed as the first channel recorded in either software.</p>
+</div>
+</div>
+<div class="section" id="using-the-info-option">
+<h2>Using the -info option<a class="headerlink" href="#using-the-info-option" title="Permalink to this headline">¶</a></h2>
+<p>First, we can see what information <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> reads from the file, and make sure this is correct before processing the file.</p>
+<p>We’ll use -info to have a sneak peak into the content of the file and -outdir to direct all the files to the same directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file.txt -info -outdir physio
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> will try to get the extension for you.
+This <code class="docutils literal notranslate"><span class="pre">-info</span></code> argument means <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> does not process the file, but only outputs information it reads from the file, by printing to the terminal and outputting a png plot of the data in the current directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>INFO      Currently running phys2bids version <span class="m">0</span>.4.0+1464.g4a56c2a.dirty
+INFO      Input file is tutorial_file.txt
+INFO      File extension is .txt
+WARNING       If both acq and txt files exist in the path, acq will be selected.
+INFO      Reading the file ./tutorial_file.txt
+INFO      phys2bids detected that your file is in Labchart format
+INFO      Checking that units of measure are BIDS compatible
+WARNING       The given unit mmHg does not have aliases, passing it as is
+WARNING       The given unit mmHg does not have aliases, passing it as is
+INFO      Reading infos
+INFO
+------------------------------------------------
+File tutorial_file.txt contains:
+<span class="m">01</span>. Trigger<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">02</span>. CO2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">03</span>. O2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">04</span>. Pulse<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+------------------------------------------------
+
+INFO      saving channel plot to physio/code/conversion/tutorial_file.png
+</pre></div>
+</div>
+<img alt="tutorial_file_channels" class="align-center" src="_images/tutorial_file.png" />
+<p>When using the <code class="docutils literal notranslate"><span class="pre">-info</span></code> option, the channel plot will always be made. It will be saved as a png file in the directory <code class="docutils literal notranslate"><span class="pre">./code/conversion/tutorial_file.png</span></code>, with the <em>same name</em> as your input filename.</p>
+<p>Now we know that the file contains four channels, sampled at the same frequency, and that the trigger is in the first column. All this information will become useful.</p>
+</div>
+<div class="section" id="generating-outputs">
+<h2>Generating outputs<a class="headerlink" href="#generating-outputs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="specifying-paths-and-names">
+<h3>Specifying paths and names<a class="headerlink" href="#specifying-paths-and-names" title="Permalink to this headline">¶</a></h3>
+<p>Next, we’ll call <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> without the <code class="docutils literal notranslate"><span class="pre">-info</span></code> option. We’ll use the same inputs as above, as well as adding <code class="docutils literal notranslate"><span class="pre">-indir</span></code> and <code class="docutils literal notranslate"><span class="pre">-outdir</span></code>. If you use <code class="docutils literal notranslate"><span class="pre">-indir</span></code> you can specify a path to your input file i.e. it does not have to be in the current directory, as is the default. (The <code class="docutils literal notranslate"><span class="pre">-indir</span></code> argument can also be used alongside the <code class="docutils literal notranslate"><span class="pre">-info</span></code> argument).</p>
+<p>When calling <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> without the <code class="docutils literal notranslate"><span class="pre">-info</span></code> argument, it will generate files; if you use the <code class="docutils literal notranslate"><span class="pre">-outdir</span></code> argument this is where <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> will save these files. If the output folder doesn’t exist, it will be created.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file.txt -outdir physio
+</pre></div>
+</div>
+<p>This is outputted to the terminal:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>INFO          Currently running phys2bids version <span class="m">0</span>.4.0+1464.g4a56c2a.dirty
+INFO          Input file is tutorial_file.txt
+INFO          File extension is .txt
+WARNING       If both acq and txt files exist in the path, acq will be selected.
+INFO          Reading the file ./tutorial_file.txt
+INFO          phys2bids detected that your file is in Labchart format
+INFO          Checking that units of measure are BIDS compatible
+WARNING       The given unit mmHg does not have aliases, passing it as is
+WARNING       The given unit mmHg does not have aliases, passing it as is
+INFO          Reading infos
+INFO
+------------------------------------------------
+File tutorial_file.txt contains:
+<span class="m">01</span>. Trigger<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">02</span>. CO2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">03</span>. O2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">04</span>. Pulse<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+------------------------------------------------
+
+INFO          saving channel plot to physio/code/conversion/tutorial_file.png
+WARNING       Skipping trigger pulse count. If you want to run it, call phys2bids using both <span class="s2">&quot;-ntp&quot;</span> and <span class="s2">&quot;-tr&quot;</span> arguments
+INFO          Preparing <span class="m">1</span> output files.
+INFO          Exporting files <span class="k">for</span> run <span class="m">1</span> freq <span class="m">1000</span>.0
+INFO
+------------------------------------------------
+Filename:       tutorial_file.txt
+
+Timepoints expected: None
+Timepoints found:       None
+Sampling Frequency:  <span class="m">1000</span>.0 Hz
+Sampling started at: -1398.0000 s
+Tip: Time <span class="m">0</span> is the <span class="nb">time</span> of first trigger
+------------------------------------------------
+</pre></div>
+</div>
+<p>Six files have been generated in the output directory:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>tutorial_file.tsv.gz</strong></dt><dd><p>Compressed file in <code class="docutils literal notranslate"><span class="pre">tsv</span></code> format containing your data without header information.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>tutorial_file.json</strong></dt><dd><p>As phys2bids is designed to be BIDs compatible, this is one of the two necessary BIDs files. It describes the content of your <code class="docutils literal notranslate"><span class="pre">tsv.gz</span></code> file.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>tutorial_file.log</strong></dt><dd><p>Inside the <code class="docutils literal notranslate"><span class="pre">code/coverage</span></code> folder. This includes the same information outputted to the terminal at the end of the call.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>phys2bids_yyyy-mm-ddThh:mm:ss.tsv</strong></dt><dd><p>This is the logger file. It contains the full terminal output of your <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> call.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>call.sh</strong></dt><dd><p>Contains the original phys2bids command</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>tutorial_file.png</strong></dt><dd><p>channels plot.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Unless specified with <code class="docutils literal notranslate"><span class="pre">-chsel</span></code>, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> will process and output all channels. Unless specified with <code class="docutils literal notranslate"><span class="pre">-chnames</span></code>, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> will read the channel names from the header information in the file. In this tutorial, we are processing all channels and reading the names from the header information.</p>
+</div>
+<div class="section" id="finding-the-start-time">
+<h3>Finding the “start time”<a class="headerlink" href="#finding-the-start-time" title="Permalink to this headline">¶</a></h3>
+<p>If you’re just transforming files into <code class="docutils literal notranslate"><span class="pre">tsv.gz</span></code>, <strong>you can ignore this</strong>. If you recorded the trigger of your (f)MRI, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> can use it to detect the moment in your input file in which you started sampling your (f)MRI data, and set the “0” time to be that point.</p>
+<p>First, we need to ensure <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> knows where our trigger channel is, and for this we can use the argument <code class="docutils literal notranslate"><span class="pre">-chtrig</span></code>. <code class="docutils literal notranslate"><span class="pre">-chtrig</span></code> has a default of 1.
+For the text file used in this example, the trigger information is the second column of the raw file; the first recorded channel. Remember, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> treats time as a hidden channel, always in position 0.
+Look back at the last command line output, from the section above. It said “Skipping trigger pulse count. If you want to run it, call phys2bids using “-ntp” and “-tr” arguments”. Also, it told us 0 timepoints were expected and none were found. So, we need to give <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> some more information for it to correctly read the trigger information in the data. In this tutorial file, there are 158 time points (triggers) and the TR is 1.2 seconds. Using these arguments, we can call <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> again:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file.txt -chtrig <span class="m">1</span> -ntp <span class="m">158</span> -tr <span class="m">1</span>.2 -outdir physio
+</pre></div>
+</div>
+<p>Now the output says:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>INFO          Counting trigger points
+INFO          The trigger is in channel <span class="m">1</span>
+INFO          The number of timepoints according to the std_thr method is <span class="m">158</span>. The computed threshold is <span class="m">1</span>.1524
+INFO          Checking number of timepoints
+INFO          Found just the right amount of timepoints!
+INFO          Plot trigger
+INFO          Preparing <span class="m">1</span> output files.
+INFO          Exporting files <span class="k">for</span> run <span class="m">1</span> freq <span class="m">1000</span>.0
+INFO
+------------------------------------------------
+Filename:       tutorial_file.txt
+
+Timepoints expected: <span class="o">[</span><span class="m">158</span><span class="o">]</span>
+Timepoints found:       <span class="m">158</span>
+Sampling Frequency:  <span class="m">1000</span>.0 Hz
+Sampling started at: <span class="m">0</span>.2460 s
+Tip: Time <span class="m">0</span> is the <span class="nb">time</span> of first trigger
+------------------------------------------------
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> has an automatic way of finding the right threshold, in order to find the correct number of timepoints, by using the mean and standard deviation of the trigger channel. If “Found just the right amount of timepoints!” appears everything should be working properly!</p>
+<p>Alright, so now we have some outputs that make sense! We have 158 timepoints expected (as inputted with <code class="docutils literal notranslate"><span class="pre">-ntp</span></code>) and found. The output also tells us that the fMRI sampling started around 0.25 seconds later than the start of this physiological sampling.</p>
+<p>Notice that an extra file has been generated, called “tutorial_file_trigger_time.png”. This is because we used the <code class="docutils literal notranslate"><span class="pre">-ntp</span></code> and <code class="docutils literal notranslate"><span class="pre">-tr</span></code> arguments.</p>
+<img alt="tutorial_file_channels" class="align-center" src="_images/tutorial_file_trigger_time.png" />
+<p>In the first row of this plot, the whole trigger channel is plotted in blue. The orange block shows where the time starts and ends (i.e. the start and end of your fMRI recording).
+In the second row, we see the first and last trigger (or expected first and last). The red dotted line represents the trigger detection threshold.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have another file that was collected in an identical way, the threshold is likely to be same. However, it is <em>very</em> important to calibrate the threshold in a couple of files before assuming this. This still <em>won’t</em> necessarily mean that it’s the right threshold for all the files, but there’s a chance that it’s ok(ish) for most of them.</p>
+</div>
+<p>If for some reason <code class="docutils literal notranslate"><span class="pre">-ntp</span></code> and the number of timepoints found by <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> is not the same there are two possible reasons:</p>
+<ol class="arabic simple">
+<li><p>You didn’t properly count the number of timepoints. Check this again; you can use the trigger png file to help you.</p></li>
+<li><p>The automatic threshold is not working. This may happen if the MRI trigger pulses vary in amplitude, and some are lower than the automatic threshold found. Don’t Panic. We have a solution for that - you can use the <code class="docutils literal notranslate"><span class="pre">-thr</span></code> option to manually input a different threshold. Change the <code class="docutils literal notranslate"><span class="pre">-thr</span></code> until the number of  timepoints founds are the same as the expected timepoints (<code class="docutils literal notranslate"><span class="pre">-ntp</span></code>).</p></li>
+<li><p>The file doesn’t have all the trigger pulses you expect because the recording started later than the MRI recording (e.g. by mistake).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> was created to deal with little sampling errors - such as distracted researchers that started sampling a bit too late than expected. For this reason, if it finds less trigger pulses than the amount specified, it will assume that the missing ones are at the beginning and anticipate the starting time consequently.</p>
+</div>
+<p>Let’s go through an example where the number of timepoints automatically found is not correct. For that, will we use tutorial_file_v2.txt (in the same location as tutorial_file.txt):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file_v2.txt -chtrig <span class="m">1</span> -ntp <span class="m">158</span> -tr <span class="m">1</span>.2 -outdir physio_v2
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>------------------------------------------------
+File tutorial_file_v2.txt contains:
+<span class="m">01</span>. Trigger<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">02</span>. CO2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">03</span>. O2<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+<span class="m">04</span>. Pulse<span class="p">;</span> sampled at <span class="m">1000</span>.0 Hz
+------------------------------------------------
+
+INFO          saving channel plot to physio_v2/code/conversion/tutorial_file_v2.png
+INFO          Counting trigger points
+INFO          The trigger is in channel <span class="m">1</span>
+INFO          The number of timepoints according to the std_thr method is <span class="m">157</span>. The computed threshold is <span class="m">1</span>.1507
+INFO          Checking number of timepoints
+WARNING       Found <span class="m">1</span> timepoints less than expected!
+WARNING       Correcting <span class="nb">time</span> offset, assuming missing timepoints are at the beginning <span class="o">(</span>try again with a more conservative thr<span class="o">)</span>
+INFO          Plot trigger
+INFO          Preparing <span class="m">1</span> output files.
+INFO          Exporting files <span class="k">for</span> run <span class="m">1</span> freq <span class="m">1000</span>.0
+INFO
+------------------------------------------------
+Filename:       tutorial_file_v2.txt
+
+Timepoints expected: <span class="o">[</span><span class="m">158</span><span class="o">]</span>
+Timepoints found:       <span class="m">157</span>
+Sampling Frequency:  <span class="m">1000</span>.0 Hz
+Sampling started at: -0.9540 s
+Tip: Time <span class="m">0</span> is the <span class="nb">time</span> of first trigger
+------------------------------------------------
+</pre></div>
+</div>
+<p>There is one trigger that <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> couldn’t find automatically. We can work out that this is a trigger in the middle of the file, if we look at the png file that has been outputted:</p>
+<img alt="tutorial_file_channels" class="align-center" src="_images/tutorial_file_v2_trigger_time_Tmissing.png" />
+<p>By looking at this figure, we can work out that we need a smaller threshold in order to include the middle time point. This can be implemented with the <code class="docutils literal notranslate"><span class="pre">-thr</span></code> argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file_v2.txt -chtrig <span class="m">1</span> -ntp <span class="m">158</span> -tr <span class="m">1</span>.2 -thr <span class="m">1</span>.04 -outdir physio_v2
+
+INFO          Counting trigger points
+INFO          The trigger is in channel <span class="m">1</span>
+INFO          The number of timepoints according to the std_thr method is <span class="m">157</span>. The computed threshold is <span class="m">1</span>.1507
+INFO          Checking number of timepoints
+WARNING       Found <span class="m">1</span> timepoints less than expected!
+WARNING       Correcting <span class="nb">time</span> offset, assuming missing timepoints are at the beginning <span class="o">(</span>try again with a more conservative thr<span class="o">)</span>
+INFO          Plot trigger
+INFO          Preparing <span class="m">1</span> output files.
+INFO          Exporting files <span class="k">for</span> run <span class="m">1</span> freq <span class="m">1000</span>.0
+INFO
+------------------------------------------------
+Filename:       tutorial_file_v2.txt
+
+Timepoints expected: <span class="o">[</span><span class="m">158</span><span class="o">]</span>
+Timepoints found:       <span class="m">157</span>
+Sampling Frequency:  <span class="m">1000</span>.0 Hz
+Sampling started at: -0.9540 s
+Tip: Time <span class="m">0</span> is the <span class="nb">time</span> of first trigger
+------------------------------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="splitting-your-input-file-into-multiple-run-output-files">
+<h3>Splitting your input file into multiple run output files<a class="headerlink" href="#splitting-your-input-file-into-multiple-run-output-files" title="Permalink to this headline">¶</a></h3>
+<p>If your file contains more than one (f)MRI acquisition (or runs), you can provide multiple values to <code class="docutils literal notranslate"><span class="pre">-ntp</span></code> in order to get multiple <code class="docutils literal notranslate"><span class="pre">.tsv.gz</span></code> outputs. If the TR of the entire session is consistent (i.e. all your acquisitions have the same TR), then you can specify one value after <code class="docutils literal notranslate"><span class="pre">-tr</span></code>.</p>
+<p>By specifying the number of timepoints in each acquisition, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> will recursively cut the input file by detecting the first trigger of the entire session and the ones after the number of timepoints you specified.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wget https://osf.io/gvy84/download -O Test2_samefreq_TWOscans.txt
+phys2bids -in Test2_samefreq_TWOscans.txt -chtrig <span class="m">1</span> -ntp <span class="m">534</span> <span class="m">513</span> -tr <span class="m">1</span>.2 <span class="m">1</span>.2 -thr <span class="m">2</span> -outdir physio_two_scans
+</pre></div>
+</div>
+<p>Now, instead of counting the trigger timepoints once, <code class="docutils literal notranslate"><span class="pre">physbids</span></code> will check the trigger channel recursively with all the values listed in <code class="docutils literal notranslate"><span class="pre">-ntp</span></code>. The logger will inform you about the number of timepoints left at each iteration.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Test2_samefreq_TWOscans.txt -chtrig <span class="m">1</span> -ntp <span class="m">534</span> <span class="m">513</span> -tr <span class="m">1</span>.2 <span class="m">1</span>.2 -thr <span class="m">2</span> -outdir physio_two_scans
+INFO          Currently running phys2bids version <span class="m">0</span>.4.0+1487.g88f97d1.dirty
+INFO          Input file is Test2_samefreq_TWOscans.txt
+INFO          File extension is .txt
+WARNING       If both acq and txt files exist in the path, acq will be selected.
+INFO          Reading the file .<span class="se">\T</span>est2_samefreq_TWOscans.txt
+INFO          phys2bids detected that your file is in Labchart format
+INFO          Checking that units of measure are BIDS compatible
+WARNING       The given unit mmHg does not have aliases, passing it as is
+INFO          Reading infos
+INFO
+------------------------------------------------
+File Test2_samefreq_TWOscans.txt contains:
+<span class="m">01</span>. Trigger<span class="p">;</span> sampled at <span class="m">100</span>.0 Hz
+<span class="m">02</span>. CO2<span class="p">;</span> sampled at <span class="m">100</span>.0 Hz
+------------------------------------------------
+
+INFO      saving channel plot to physio_two_scans<span class="se">\c</span>ode<span class="se">\c</span>onversion<span class="se">\T</span>est2_samefreq_TWOscans.png
+INFO      Counting trigger points
+INFO      The trigger is in channel <span class="m">1</span>
+INFO      The number of timepoints found with the manual threshold of <span class="m">2</span>.0000 is <span class="m">1047</span>
+INFO      Checking number of timepoints
+INFO      Found just the right amount of timepoints!
+WARNING
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+phys2bids will split the input file according to the given -tr and -ntp arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+INFO      Counting trigger points
+INFO      The trigger is in channel <span class="m">1</span>
+INFO      The number of timepoints found with the manual threshold of <span class="m">2</span>.0000 is <span class="m">1047</span>
+INFO      Checking number of timepoints
+WARNING       Found <span class="m">513</span> timepoints more than expected!
+Assuming extra timepoints are at the end <span class="o">(</span>try again with a more liberal thr<span class="o">)</span>
+INFO
+--------------------------------------------------------------
+Slicing between <span class="m">0</span>.0 seconds and <span class="m">710</span>.43 seconds
+--------------------------------------------------------------
+INFO      Counting trigger points
+INFO      The trigger is in channel <span class="m">1</span>
+INFO      The number of timepoints found with the manual threshold of <span class="m">2</span>.0000 is <span class="m">513</span>
+INFO      Checking number of timepoints
+INFO      Found just the right amount of timepoints!
+INFO
+--------------------------------------------------------------
+Slicing between <span class="m">1056</span>.81 seconds and <span class="m">1690</span>.42 seconds
+--------------------------------------------------------------
+INFO      Counting trigger points
+INFO      The trigger is in channel <span class="m">1</span>
+INFO      The number of timepoints found with the manual threshold of <span class="m">2</span>.0000 is <span class="m">534</span>
+INFO      Checking number of timepoints
+INFO      Found just the right amount of timepoints!
+INFO      Counting trigger points
+INFO      The trigger is in channel <span class="m">1</span>
+INFO      The number of timepoints found with the manual threshold of <span class="m">2</span>.0000 is <span class="m">513</span>
+INFO      Checking number of timepoints
+INFO      Found just the right amount of timepoints!
+INFO      Plot trigger
+INFO      Plot trigger
+INFO      Found <span class="m">2</span> different scans in input!
+INFO      Preparing <span class="m">2</span> output files.
+INFO          Exporting files <span class="k">for</span> run <span class="m">1</span> freq <span class="m">100</span>.0
+</pre></div>
+</div>
+<p>The logger also notifies you about the slicing points used (the first always being from the beginning of session, until the specified number of timepoints after the first trigger). The user can also check the resulting slice by looking at the plot of the trigger channel for each run. Each slice is adjusted with a padding after the last trigger. Such padding can be specified while calling <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> with <code class="docutils literal notranslate"><span class="pre">-pad</span></code>. If nothing is specified, the default value of 9 seconds will be used. This padding is also applied at the beginning (before the first trigger of the run) of the 2nd to last run.</p>
+<div class="section" id="what-if-i-have-multiple-acquisition-types">
+<h4>What if I have multiple acquisition types ?<a class="headerlink" href="#what-if-i-have-multiple-acquisition-types" title="Permalink to this headline">¶</a></h4>
+<p>The user can also benefit from this utility when dealing with multiple <strong>acquisition types</strong> such as different functional scans with different TRs. Like <code class="docutils literal notranslate"><span class="pre">-ntp</span></code>, <code class="docutils literal notranslate"><span class="pre">-tr</span></code> can take multiple values. <strong>Though, if more than one value is specified, they require the same amount of values</strong>. The idea is simple: if you only have one acquisition type, the one <code class="docutils literal notranslate"><span class="pre">-tr</span></code> input you gave will be broadcast through all runs, but if you have different acquisition types, you have to list all of them in order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Why would I have more than one fMRI acquisition in the physiological recording?</strong></p>
+<p>The idea is to reduce human error and have a good padding around your fMRI scan!</p>
+<p>Synchronization between start of both fMRI and physiological acquisitions can be difficult, so it is safer to have as few physiological recordings as possible, with multiple imaging sequences.</p>
+<p>Moreover, if you want to correct for recording/physiological delays, you will love <em>that bit of recorded information</em> around your fMRI scan!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generating-outputs-in-bids-format">
+<h2>Generating outputs in BIDs format<a class="headerlink" href="#generating-outputs-in-bids-format" title="Permalink to this headline">¶</a></h2>
+<p>Alright, now the really interesting part! This section will explain how to use the <code class="docutils literal notranslate"><span class="pre">-heur</span></code>, <code class="docutils literal notranslate"><span class="pre">-sub</span></code>, and <code class="docutils literal notranslate"><span class="pre">-ses</span></code> arguments, to save the files in BIDs format. After all, that’s probably why you’re here.</p>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> uses heuristic rules <em>à la</em> <a class="reference external" href="https://github.com/nipy/heudiconv">heudiconv</a>. At the moment, it can only use the name of the file to understand what should be done with it but we’re working on making it <em>smarter</em>. There is a complete heuristic file for the tutorial, in the <code class="docutils literal notranslate"><span class="pre">heuristics</span></code> folder. Inside it looks more or less like this:</p>
+<p>The heuristic file has to be written accordingly, with a set of rules that could work for all the files in your dataset. You can learn more about it if you check the <a class="reference external" href="heuristic.html">guide on how to set it up</a>.
+In this case, our heuristic file looks for a file that contains the name <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>. It corresponds to the task <code class="docutils literal notranslate"><span class="pre">test</span></code> and run <code class="docutils literal notranslate"><span class="pre">00</span></code>. Note that <strong>only the task is required</strong>, all the other fields are optional - look them up in the BIDs documentation and see if you need them.</p>
+<p>As there might not be a link between the physiological file and the subject (and session) that it relates to, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> requires such information to be given from the user. In order for the <em>BIDsification</em> to happen, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> needs the <strong>full path</strong> to the heuristic file, as well as the subject label. The session label is optional. The <code class="docutils literal notranslate"><span class="pre">-outdir</span></code> option will become the root folder for your BIDs files - i.e. your <em>site folder</em>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>phys2bids -in tutorial_file.txt -chtrig <span class="m">1</span> -ntp <span class="m">158</span> -tr <span class="m">1</span>.2 -outdir physio_bids -heur /home/arthurdent/phys2bids/phys2bids/heuristics/heur_tutorial.py -sub <span class="m">006</span> -ses <span class="m">01</span>
+</pre></div>
+</div>
+<p>The output will look very similar to our previous calls, when we did not use the <code class="docutils literal notranslate"><span class="pre">-heur</span></code>, <code class="docutils literal notranslate"><span class="pre">-sub</span></code> and <code class="docutils literal notranslate"><span class="pre">-ses</span></code> arguments. However, there is one extra line in command line output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>INFO          Preparing BIDS output using /home/arthurdent/phys2bids/phys2bids/heuristics/heur_tutorial.py
+</pre></div>
+</div>
+<p>Now let’s check the outputs it has generated. In the <code class="docutils literal notranslate"><span class="pre">-outdir</span></code> you will see a png file and tsv logger file, like before (now with some different file names).
+You will also see a folder for the specified subject, that (optionally) contains a folder for the session, containing a folder for the functional data, containing the log file and the required BIDs files with the right name!</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- /home/arthurdent/test_dir/physio_bids /
+participants.tsv
+README.md
+dataset_description.json
+- sub-006 /
+    - ses-01 /
+        - func /
+            - sub-006_ses-01_task-test_rec-labchart_run-00_physio.json
+            - sub-006_ses-01_task-test_rec-labchart_run-00_physio.tsv.gz
+        - code /
+            - coverage/
+            - phys2bids_yyyy-mm-ddThh:mm:ss.tsv
+            - call.sh
+            - tutorial_file.png
+            - tutorial_file_sub-006_sub-01_trigger_time.png
+            - sub-006_ses-01_task-test_rec-labchart_run-01_physio.log
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The main idea is that <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> should be called through a loop that can process all the files of your dataset. It’s still a bit cranky, but we’re looking to implement <em>smarter</em> solutions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not edit the heuristic file under where it says ‘Don’t modify below this!’.</p>
+</div>
+<p>One last thing left to do: take these files, remove the logs, and share them in public platforms!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="heuristic.html" class="btn btn-neutral float-right" title="How to set up a heuristic file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

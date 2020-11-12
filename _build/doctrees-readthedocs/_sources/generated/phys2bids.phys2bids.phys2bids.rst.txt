@@ -1,0 +1,12 @@
+phys2bids.phys2bids.phys2bids
+=============================
+
+.. currentmodule:: phys2bids.phys2bids
+
+.. autofunction:: phys2bids
+
+.. .. include:: modules/phys2bids.phys2bids.phys2bids.examples
+
+.. raw:: html
+
+    <div style='clear:both'></div>

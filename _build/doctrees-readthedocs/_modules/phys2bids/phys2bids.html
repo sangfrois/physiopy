@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>phys2bids.phys2bids &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="../../_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>phys2bids.phys2bids</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for phys2bids.phys2bids</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Phys2bids is a python3 library meant to set physiological files in BIDS standard.</span>
+
+<span class="sd">It was born for Acqknowledge files (BIOPAC), and at the moment it supports</span>
+<span class="sd">``.acq`` files and ``.txt`` files obtained by labchart (ADInstruments).</span>
+
+<span class="sd">It requires python 3.6 or above, as well as the modules:</span>
+<span class="sd">- `numpy`</span>
+<span class="sd">- `matplotlib`</span>
+
+<span class="sd">In order to process ``.acq`` files, it needs `bioread`, an excellent module</span>
+<span class="sd">that can be found at `this link`_</span>
+
+<span class="sd">The project is under development.</span>
+
+<span class="sd">At the very moment, it assumes:</span>
+<span class="sd">-  the input file is from one individual scan, not one session with multiple scans.</span>
+
+<span class="sd">.. _this link:</span>
+<span class="sd">   https://github.com/uwmadison-chm/bioread</span>
+
+<span class="sd">Copyright 2019, The Phys2BIDS community.</span>
+<span class="sd">Please scroll to bottom to read full license.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">cp</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">phys2bids</span> <span class="k">import</span> <span class="n">utils</span><span class="p">,</span> <span class="n">viz</span><span class="p">,</span> <span class="n">_version</span><span class="p">,</span> <span class="n">bids</span>
+<span class="kn">from</span> <span class="nn">phys2bids.cli.run</span> <span class="k">import</span> <span class="n">_get_parser</span>
+<span class="kn">from</span> <span class="nn">phys2bids.physio_obj</span> <span class="k">import</span> <span class="n">BlueprintOutput</span>
+<span class="kn">from</span> <span class="nn">phys2bids.slice4phys</span> <span class="k">import</span> <span class="n">slice4phys</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">.due</span> <span class="k">import</span> <span class="n">due</span><span class="p">,</span> <span class="n">Doi</span>
+
+<span class="n">LGR</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_summary</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ntp_expected</span><span class="p">,</span> <span class="n">ntp_found</span><span class="p">,</span> <span class="n">samp_freq</span><span class="p">,</span> <span class="n">time_offset</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print a summary onscreen and in file with informations on the files.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename: str</span>
+<span class="sd">        Name of the input of phys2bids.</span>
+<span class="sd">    ntp_expected: int</span>
+<span class="sd">        Number of expected timepoints, as defined by user.</span>
+<span class="sd">    ntp_found: int</span>
+<span class="sd">        Number of timepoints found with the automatic process.</span>
+<span class="sd">    samp_freq: float</span>
+<span class="sd">        Frequency of sampling for the output file.</span>
+<span class="sd">    time_offset: float</span>
+<span class="sd">        Difference between beginning of file and first TR.</span>
+<span class="sd">    outfile: str or path</span>
+<span class="sd">        Fullpath to output file.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Outcome:</span>
+<span class="sd">    summary: str</span>
+<span class="sd">        Prints the summary on screen</span>
+<span class="sd">    outfile: .log file</span>
+<span class="sd">        File containing summary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="o">-</span><span class="n">time_offset</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">------------------------------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Filename:            </span><span class="si">{filename}</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Timepoints expected: </span><span class="si">{ntp_expected}</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Timepoints found:    </span><span class="si">{ntp_found}</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Sampling Frequency:  </span><span class="si">{samp_freq}</span><span class="s1"> Hz</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Sampling started at: </span><span class="si">{start_time:.4f}</span><span class="s1"> s</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;Tip: Time 0 is the time of first trigger</span><span class="se">\n</span><span class="s1">&#39;</span>
+               <span class="n">f</span><span class="s1">&#39;------------------------------------------------</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s1">&#39;.log&#39;</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_json</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">samp_freq</span><span class="p">,</span> <span class="n">time_offset</span><span class="p">,</span> <span class="n">ch_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print the json required by BIDS format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    outfile: str or path</span>
+<span class="sd">        Fullpath to output file.</span>
+<span class="sd">    samp_freq: float</span>
+<span class="sd">        Frequency of sampling for the output file.</span>
+<span class="sd">    time_offset: float</span>
+<span class="sd">        Difference between beginning of file and first TR.</span>
+<span class="sd">    ch_name: list of str</span>
+<span class="sd">        List of channel names, as specified by BIDS format.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Outcome:</span>
+<span class="sd">    outfile: .json file</span>
+<span class="sd">        File containing information for BIDS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="o">-</span><span class="n">time_offset</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">SamplingFrequency</span><span class="o">=</span><span class="n">samp_freq</span><span class="p">,</span>
+                   <span class="n">StartTime</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                   <span class="n">Columns</span><span class="o">=</span><span class="n">ch_name</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">writejson</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="phys2bids"><a class="viewcode-back" href="../../generated/phys2bids.phys2bids.phys2bids.html#phys2bids.phys2bids.phys2bids">[docs]</a><span class="nd">@due</span><span class="o">.</span><span class="n">dcite</span><span class="p">(</span>
+     <span class="n">Doi</span><span class="p">(</span><span class="s1">&#39;10.5281/zenodo.3470091&#39;</span><span class="p">),</span>
+     <span class="n">path</span><span class="o">=</span><span class="s1">&#39;phys2bids&#39;</span><span class="p">,</span>
+     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Conversion of physiological trace data to BIDS format&#39;</span><span class="p">,</span>
+     <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+     <span class="n">cite_module</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@due</span><span class="o">.</span><span class="n">dcite</span><span class="p">(</span>
+    <span class="n">Doi</span><span class="p">(</span><span class="s1">&#39;10.1038/sdata.2016.44&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="o">=</span><span class="s1">&#39;phys2bids&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;The BIDS specification&#39;</span><span class="p">,</span>
+    <span class="n">cite_module</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">phys2bids</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">heur_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">sub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chtrig</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">chsel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_timepoints_expected</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">tr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ch_name</span><span class="o">=</span><span class="p">[],</span> <span class="n">yml</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run main workflow of phys2bids.</span>
+
+<span class="sd">    Runs the parser, does some checks on input, then imports</span>
+<span class="sd">    the right interface file to read the input. If only info is required,</span>
+<span class="sd">    it returns a summary onscreen.</span>
+<span class="sd">    Otherwise, it operates on the input to return a .tsv.gz file, possibly</span>
+<span class="sd">    in BIDS format.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NotImplementedError</span>
+<span class="sd">        If the file extension is not supported yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check options to make them internally coherent pt. I</span>
+    <span class="c1"># #!# This can probably be done while parsing?</span>
+    <span class="n">outdir</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">check_input_dir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">path_exists_or_make_it</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">path_exists_or_make_it</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">))</span>
+    <span class="n">conversion_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="s1">&#39;conversion&#39;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">path_exists_or_make_it</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">)</span>
+
+    <span class="c1"># Create logfile name</span>
+    <span class="n">basename</span> <span class="o">=</span> <span class="s1">&#39;phys2bids_&#39;</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;tsv&#39;</span>
+    <span class="n">isotime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">)</span>
+    <span class="n">logname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span> <span class="p">(</span><span class="n">basename</span> <span class="o">+</span> <span class="n">isotime</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">))</span>
+
+    <span class="c1"># Set logging format</span>
+    <span class="n">log_formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="se">\t</span><span class="si">%(name)-12s</span><span class="se">\t</span><span class="si">%(levelname)-8s</span><span class="se">\t</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Set up logging file and open it for writing</span>
+    <span class="n">log_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">logname</span><span class="p">)</span>
+    <span class="n">log_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">log_formatter</span><span class="p">)</span>
+    <span class="n">sh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">quiet</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
+                            <span class="n">handlers</span><span class="o">=</span><span class="p">[</span><span class="n">log_handler</span><span class="p">,</span> <span class="n">sh</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)-10s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+                            <span class="n">handlers</span><span class="o">=</span><span class="p">[</span><span class="n">log_handler</span><span class="p">,</span> <span class="n">sh</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)-10s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                            <span class="n">handlers</span><span class="o">=</span><span class="p">[</span><span class="n">log_handler</span><span class="p">,</span> <span class="n">sh</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)-10s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">version_number</span> <span class="o">=</span> <span class="n">_version</span><span class="o">.</span><span class="n">get_versions</span><span class="p">()[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Currently running phys2bids version </span><span class="si">{version_number}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Input file is </span><span class="si">{filename}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Save call.sh</span>
+    <span class="n">arg_str</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">call_str</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;phys2bids </span><span class="si">{arg_str}</span><span class="s1">&#39;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span> <span class="s1">&#39;call.sh&#39;</span><span class="p">),</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;#!bin/bash </span><span class="se">\n</span><span class="si">{call_str}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Check options to make them internally coherent pt. II</span>
+    <span class="c1"># #!# This can probably be done while parsing?</span>
+    <span class="n">indir</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">check_input_dir</span><span class="p">(</span><span class="n">indir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">chtrig</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Wrong trigger channel. Channel indexing starts with 1!&#39;</span><span class="p">)</span>
+
+    <span class="n">filename</span><span class="p">,</span> <span class="n">ftype</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">check_input_type</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+                                             <span class="n">indir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">heur_file</span><span class="p">:</span>
+        <span class="n">heur_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">check_input_ext</span><span class="p">(</span><span class="n">heur_file</span><span class="p">,</span> <span class="s1">&#39;.py&#39;</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">check_file_exists</span><span class="p">(</span><span class="n">heur_file</span><span class="p">)</span>
+
+    <span class="n">infile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">indir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">check_file_exists</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">num_timepoints_expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_timepoints_expected</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="n">tr</span> <span class="o">=</span> <span class="p">[</span><span class="n">tr</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">tr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">num_timepoints_expected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># If tr and ntp were specified, check that tr is either length one or ntp.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Number of sequence types listed with TR &#39;</span>
+                            <span class="s1">&#39;doesn</span><span class="se">\&#39;</span><span class="s1">t match expected number of runs in &#39;</span>
+                            <span class="s1">&#39;the session&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Read file!</span>
+    <span class="k">if</span> <span class="n">ftype</span> <span class="o">==</span> <span class="s1">&#39;acq&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">phys2bids.interfaces.acq</span> <span class="k">import</span> <span class="n">populate_phys_input</span>
+    <span class="k">elif</span> <span class="n">ftype</span> <span class="o">==</span> <span class="s1">&#39;txt&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">phys2bids.interfaces.txt</span> <span class="k">import</span> <span class="n">populate_phys_input</span>
+
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Reading the file </span><span class="si">{infile}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">phys_in</span> <span class="o">=</span> <span class="n">populate_phys_input</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">chtrig</span><span class="p">)</span>
+
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Checking that units of measure are BIDS compatible&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">unit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phys_in</span><span class="o">.</span><span class="n">units</span><span class="p">):</span>
+        <span class="n">phys_in</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">bidsify_units</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading infos&#39;</span><span class="p">)</span>
+    <span class="n">phys_in</span><span class="o">.</span><span class="n">print_info</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># #!# Here the function viz.plot_channel should be called</span>
+    <span class="n">viz</span><span class="o">.</span><span class="n">plot_all</span><span class="p">(</span><span class="n">phys_in</span><span class="o">.</span><span class="n">ch_name</span><span class="p">,</span> <span class="n">phys_in</span><span class="o">.</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">phys_in</span><span class="o">.</span><span class="n">units</span><span class="p">,</span>
+                 <span class="n">phys_in</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="n">infile</span><span class="p">,</span> <span class="n">conversion_path</span><span class="p">)</span>
+    <span class="c1"># If only info were asked, end here.</span>
+    <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># The next few lines remove the undesired channels from phys_in.</span>
+    <span class="k">if</span> <span class="n">chsel</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Dropping unselected channels&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">phys_in</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chsel</span><span class="p">:</span>
+                <span class="n">phys_in</span><span class="o">.</span><span class="n">delete_at_index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># If requested, change channel names.</span>
+    <span class="k">if</span> <span class="n">ch_name</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Renaming channels with given names&#39;</span><span class="p">)</span>
+        <span class="n">phys_in</span><span class="o">.</span><span class="n">rename_channels</span><span class="p">(</span><span class="n">ch_name</span><span class="p">)</span>
+
+    <span class="c1"># Checking acquisition type via user&#39;s input</span>
+    <span class="k">if</span> <span class="n">tr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">num_timepoints_expected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1">#  Multi-run acquisition type section</span>
+        <span class="c1">#  Check list length, more than 1 means multi-run</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># if multi-run of same sequence type, pad list with ones</span>
+            <span class="c1"># and multiply array with user&#39;s input</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">))</span> <span class="o">*</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Sum of values in ntp_list should be equivalent to num_timepoints_found</span>
+            <span class="n">phys_in</span><span class="o">.</span><span class="n">check_trigger_amount</span><span class="p">(</span><span class="n">thr</span><span class="o">=</span><span class="n">thr</span><span class="p">,</span>
+                                         <span class="n">num_timepoints_expected</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">),</span>
+                                         <span class="n">tr</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Check that sum of tp expected is equivalent to num_timepoints_found,</span>
+            <span class="c1"># if it passes call slice4phys</span>
+            <span class="k">if</span> <span class="n">phys_in</span><span class="o">.</span><span class="n">num_timepoints_found</span> <span class="o">!=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num_timepoints_expected</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The number of triggers found is different &#39;</span>
+                                <span class="s1">&#39;than expected. Better stop now than break &#39;</span>
+                                <span class="s1">&#39;something.&#39;</span><span class="p">)</span>
+
+            <span class="c1"># slice the recording based on user&#39;s entries</span>
+            <span class="c1"># !!! ATTENTION: PHYS_IN GETS OVERWRITTEN AS DICTIONARY</span>
+            <span class="n">phys_in</span> <span class="o">=</span> <span class="n">slice4phys</span><span class="p">(</span><span class="n">phys_in</span><span class="p">,</span> <span class="n">num_timepoints_expected</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span>
+                                 <span class="n">phys_in</span><span class="o">.</span><span class="n">thr</span><span class="p">,</span> <span class="n">pad</span><span class="p">)</span>
+            <span class="c1"># returns a dictionary in the form {run_idx: phys_in[startpoint, endpoint]}</span>
+
+            <span class="c1"># save a figure for each run | give the right acquisition parameters for runs</span>
+            <span class="n">fileprefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span>
+                                      <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phys_in</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">plot_fileprefix</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{fileprefix}</span><span class="s1">_</span><span class="si">{run}</span><span class="s1">&#39;</span>
+                <span class="n">viz</span><span class="o">.</span><span class="n">export_trigger_plot</span><span class="p">(</span><span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">],</span> <span class="n">chtrig</span><span class="p">,</span> <span class="n">plot_fileprefix</span><span class="p">,</span> <span class="n">tr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                        <span class="n">num_timepoints_expected</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">filename</span><span class="p">,</span>
+                                        <span class="n">sub</span><span class="p">,</span> <span class="n">ses</span><span class="p">)</span>
+
+        <span class="c1"># Single run acquisition type, or : nothing to split workflow</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Run analysis on trigger channel to get first timepoint</span>
+            <span class="c1"># and the time offset.</span>
+            <span class="n">phys_in</span><span class="o">.</span><span class="n">check_trigger_amount</span><span class="p">(</span><span class="n">thr</span><span class="p">,</span> <span class="n">num_timepoints_expected</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="c1"># save a figure of the trigger</span>
+            <span class="n">fileprefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span>
+                                      <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">export_trigger_plot</span><span class="p">(</span><span class="n">phys_in</span><span class="p">,</span> <span class="n">chtrig</span><span class="p">,</span> <span class="n">fileprefix</span><span class="p">,</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="n">num_timepoints_expected</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">filename</span><span class="p">,</span>
+                                    <span class="n">sub</span><span class="p">,</span> <span class="n">ses</span><span class="p">)</span>
+
+            <span class="c1"># Reassign phys_in as dictionary</span>
+            <span class="c1"># !!! ATTENTION: PHYS_IN GETS OVERWRITTEN AS DICTIONARY</span>
+            <span class="n">phys_in</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">phys_in</span><span class="p">}</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Skipping trigger pulse count. If you want to run it, &#39;</span>
+                    <span class="s1">&#39;call phys2bids using both &quot;-ntp&quot; and &quot;-tr&quot; arguments&#39;</span><span class="p">)</span>
+        <span class="c1"># !!! ATTENTION: PHYS_IN GETS OVERWRITTEN AS DICTIONARY</span>
+        <span class="n">phys_in</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">phys_in</span><span class="p">}</span>
+
+    <span class="c1"># The next few lines create a dictionary of different BlueprintInput</span>
+    <span class="c1"># objects, one for each unique frequency for each run in phys_in</span>
+    <span class="c1"># they also save the amount of runs and unique frequencies</span>
+    <span class="n">run_amount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phys_in</span><span class="p">)</span>
+    <span class="n">uniq_freq_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">phys_in</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+    <span class="n">freq_amount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniq_freq_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">freq_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Found </span><span class="si">{freq_amount}</span><span class="s1"> different frequencies in input!&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">run_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Found </span><span class="si">{run_amount}</span><span class="s1"> different scans in input!&#39;</span><span class="p">)</span>
+
+    <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Preparing {freq_amount*run_amount} output files.&#39;</span><span class="p">)</span>
+    <span class="c1"># Create phys_out dict that will have a blueprint object for each different frequency</span>
+    <span class="n">phys_out</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">heur_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">sub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Preparing BIDS output using </span><span class="si">{heur_file}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># If heuristics are used, init a dict of arguments to pass to use_heuristic</span>
+        <span class="n">heur_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;heur_file&#39;</span><span class="p">:</span> <span class="n">heur_file</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">:</span> <span class="n">sub</span><span class="p">,</span> <span class="s1">&#39;ses&#39;</span><span class="p">:</span> <span class="n">ses</span><span class="p">,</span>
+                     <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;outdir&#39;</span><span class="p">:</span> <span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;record_label&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+        <span class="c1"># Generate participants.tsv file if it doesn&#39;t exist already.</span>
+        <span class="c1"># Update the file if the subject is not in the file.</span>
+        <span class="c1"># Do not update if the subject is already in the file.</span>
+        <span class="n">bids</span><span class="o">.</span><span class="n">participants_file</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">yml</span><span class="p">,</span> <span class="n">sub</span><span class="p">)</span>
+        <span class="c1"># Generate dataset_description.json file if it doesn&#39;t exist already.</span>
+        <span class="n">bids</span><span class="o">.</span><span class="n">dataset_description_file</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+        <span class="c1"># Generate README file if it doesn&#39;t exist already.</span>
+        <span class="n">bids</span><span class="o">.</span><span class="n">readme_file</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+        <span class="n">cp</span><span class="p">(</span><span class="n">heur_file</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span>
+           <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">heur_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">heur_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">sub</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;While &quot;-heur&quot; was specified, option &quot;-sub&quot; was not.</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;Skipping BIDS formatting.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Export a (set of) phys_out for each element in phys_in</span>
+    <span class="c1"># run keys start from 1 (human friendly)</span>
+    <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">phys_in</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">uniq_freq</span> <span class="ow">in</span> <span class="n">uniq_freq_list</span><span class="p">:</span>
+            <span class="c1"># Initialise the key for the (possibly huge amount of) dictionary entries</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{run}</span><span class="s1">_</span><span class="si">{uniq_freq}</span><span class="s1">&#39;</span>
+            <span class="c1"># copy the phys_in object to the new dict entry</span>
+            <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">])</span>
+            <span class="c1"># this counter will take into account how many channels are eliminated</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># for each channel in the original phys_in object</span>
+            <span class="c1"># take the frequency</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">):</span>
+                <span class="c1"># if that frequency is different than the frequency of the phys_obj entry</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">uniq_freq</span><span class="p">:</span>
+                    <span class="c1"># eliminate that channel from the dict since we only want channels</span>
+                    <span class="c1"># with the same frequency</span>
+                    <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">delete_at_index</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
+                    <span class="c1"># take into acount the elimination so in the next eliminated channel we</span>
+                    <span class="c1"># eliminate correctly</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># Also create a BlueprintOutput object for each unique frequency found.</span>
+            <span class="c1"># Populate it with the corresponding blueprint input and replace it</span>
+            <span class="c1"># in the dictionary.</span>
+            <span class="c1"># Add time channel in the proper frequency.</span>
+            <span class="k">if</span> <span class="n">uniq_freq</span> <span class="o">!=</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">ch_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                <span class="n">num</span><span class="o">=</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="c1"># Add trigger channel in the proper frequency.</span>
+            <span class="k">if</span> <span class="n">uniq_freq</span> <span class="o">!=</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">chtrig</span><span class="p">]:</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">ch_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="n">chtrig</span><span class="p">])</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">chtrig</span><span class="p">])</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                             <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                             <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="n">chtrig</span><span class="p">]))</span>
+            <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">BlueprintOutput</span><span class="o">.</span><span class="n">init_from_blueprint</span><span class="p">(</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="c1"># Preparing output parameters: name and folder.</span>
+        <span class="k">for</span> <span class="n">uniq_freq</span> <span class="ow">in</span> <span class="n">uniq_freq_list</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{run}</span><span class="s1">_</span><span class="si">{uniq_freq}</span><span class="s1">&#39;</span>
+            <span class="c1"># If possible, prepare bids renaming.</span>
+            <span class="k">if</span> <span class="n">heur_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">sub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Add run info to heur_args if more than one run is present</span>
+                <span class="k">if</span> <span class="n">run_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">heur_args</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{run:02d}</span><span class="s1">&#39;</span>
+
+                <span class="c1"># Append &quot;recording-freq&quot; to filename if more than one freq</span>
+                <span class="k">if</span> <span class="n">freq_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">heur_args</span><span class="p">[</span><span class="s1">&#39;record_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{uniq_freq:.0f}</span><span class="s1">Hz&#39;</span>
+
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">bids</span><span class="o">.</span><span class="n">use_heuristic</span><span class="p">(</span><span class="o">**</span><span class="n">heur_args</span><span class="p">)</span>
+
+                <span class="c1"># If any filename exists already because of multirun, append labels</span>
+                <span class="c1"># But warn about the non-validity of this BIDS-like name.</span>
+                <span class="k">if</span> <span class="n">run_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">phys</span><span class="o">.</span><span class="n">filename</span> <span class="o">==</span> <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span>
+                           <span class="k">for</span> <span class="n">phys</span> <span class="ow">in</span> <span class="n">phys_out</span><span class="o">.</span><span class="n">values</span><span class="p">()]):</span>
+                        <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{phys_out[key].filename}</span><span class="s1">&#39;</span>
+                                                  <span class="n">f</span><span class="s1">&#39;_take-</span><span class="si">{run}</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Identified multiple outputs with the same name.</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                    <span class="s1">&#39;Appending fake label to avoid overwriting.</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                    <span class="s1">&#39;!!! ATTENTION !!! the output is not BIDS compliant.</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                    <span class="s1">&#39;Please check heuristics to solve the problem.&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span>
+                                                      <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                                                                       <span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="c1"># Append &quot;run&quot; to filename if more than one run</span>
+                <span class="k">if</span> <span class="n">run_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{phys_out[key].filename}</span><span class="s1">_</span><span class="si">{run:02d}</span><span class="s1">&#39;</span>
+                <span class="c1"># Append &quot;freq&quot; to filename if more than one freq</span>
+                <span class="k">if</span> <span class="n">freq_amount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{phys_out[key].filename}</span><span class="s1">_</span><span class="si">{uniq_freq:.0f}</span><span class="s1">Hz&#39;</span>
+
+            <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Exporting files for run </span><span class="si">{run}</span><span class="s1"> freq </span><span class="si">{uniq_freq}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;.tsv.gz&#39;</span><span class="p">,</span>
+                       <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.8e</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">print_json</span><span class="p">(</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span>
+                       <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span> <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">ch_name</span><span class="p">)</span>
+            <span class="n">print_summary</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">num_timepoints_expected</span><span class="p">,</span>
+                          <span class="n">phys_in</span><span class="p">[</span><span class="n">run</span><span class="p">]</span><span class="o">.</span><span class="n">num_timepoints_found</span><span class="p">,</span> <span class="n">uniq_freq</span><span class="p">,</span>
+                          <span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span>
+                          <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversion_path</span><span class="p">,</span>
+                                       <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">phys_out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+                                                        <span class="p">)[</span><span class="mi">0</span><span class="p">]))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">_get_parser</span><span class="p">()</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">phys2bids</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">_main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Copyright 2019, The Phys2BIDS community.</span>
+
+<span class="sd">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="sd">you may not use this file except in compliance with the License.</span>
+<span class="sd">You may obtain a copy of the License at</span>
+
+<span class="sd">http://www.apache.org/licenses/LICENSE-2.0</span>
+
+<span class="sd">Unless required by applicable law or agreed to in writing, software</span>
+<span class="sd">distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="sd">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="sd">See the License for the specific language governing permissions and</span>
+<span class="sd">limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

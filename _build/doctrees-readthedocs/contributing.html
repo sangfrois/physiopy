@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contributing to physiopy &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to contribute to physiopy" href="contributorfile.html" />
+    <link rel="prev" title="Command-line usage" href="cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linux-mac-and-windows-developer-installation">Linux, Mac, and Windows developer installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-installation">Basic installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-developer-installation">Full developer installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-your-installation">Check your installation!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contributing-to-physiopy">
+<span id="contributing"></span><h1>Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code><a class="headerlink" href="#contributing-to-physiopy" title="Permalink to this headline">¶</a></h1>
+<p>First of all: thank you!</p>
+<p>Contributions can be made in different ways, not only code!
+As we follow the <a class="reference external" href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification, any contribution will be recognised accordingly.</p>
+<p>Follow these steps to get started:</p>
+<ol class="arabic simple">
+<li><p>Have a look at the <a class="reference external" href="contributorfile.html">contributor guide</a> page as well as the <a class="reference external" href="conduct.html">code of conduct</a>.</p></li>
+<li><p>Make sure that you have a GitHub account. You can set up a <a class="reference external" href="https://github.com/">free GitHub account</a>; here are some <a class="reference external" href="https://help.github.com/articles/signing-up-for-a-new-github-account">instructions</a>.</p></li>
+<li><p>If you intend to contribute code and/or use the <code class="docutils literal notranslate"><span class="pre">physiopy</span></code> packages in any way, check that you have <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> installed on your system. Then install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> as a developer. This will let you run the program with the latest modifications, without requiring to re-install it every time.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following instructions are provided assuming that python 3 is <strong>not</strong> your default version of python.
+If it is, you might need to use <code class="docutils literal notranslate"><span class="pre">pip</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pip3</span></code>, although some OSs do adopt <code class="docutils literal notranslate"><span class="pre">pip3</span></code> anyway.
+If you want to check, type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code> in a terminal.</p>
+</div>
+<div class="section" id="linux-mac-and-windows-developer-installation">
+<h2>Linux, Mac, and Windows developer installation<a class="headerlink" href="#linux-mac-and-windows-developer-installation" title="Permalink to this headline">¶</a></h2>
+<p>Be sure to have <code class="docutils literal notranslate"><span class="pre">git</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> installed. Fork the phys2bids repository in GitHub, then open a terminal and run the following code to clone the forked repository and set it as your <cite>origin</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="p">{</span><span class="n">username</span><span class="p">}</span><span class="o">/</span><span class="n">phys2bids</span><span class="o">.</span><span class="n">git</span>
+<span class="c1"># or in case you prefer to use ssh:</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:{</span><span class="n">username</span><span class="p">}</span><span class="o">/</span><span class="n">phys2bids</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>We also recommend to set up the physiopy/phys2bids repository as <cite>upstream</cite>.
+In this way you can always keep your main branch up to date with the command <cite>git pull upstream master</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">phys2bids</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">physiopy</span><span class="o">/</span><span class="n">phys2bids</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">upstream</span> <span class="n">master</span>
+</pre></div>
+</div>
+<div class="section" id="basic-installation">
+<h3>Basic installation<a class="headerlink" href="#basic-installation" title="Permalink to this headline">¶</a></h3>
+<p>If you use python frequently, or you are a python developer, chances are that all the necessary dependencies
+are already installed in your system.</p>
+<p>Move into the <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> folder and execute the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="full-developer-installation">
+<h3>Full developer installation<a class="headerlink" href="#full-developer-installation" title="Permalink to this headline">¶</a></h3>
+<p>If it’s your first experience as a python developer, or you just want to be sure that you have everything you need
+to collaborate with us, you can install <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> with all the other packages that we frequently use during development in one step!</p>
+<p>Move into the <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> folder and execute the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This will install:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> as an editable package, which means that you can modify the program and run it without having to reinstall it every time!</p></li>
+<li><p>All <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> dependencies.</p></li>
+<li><p>All <strong>interface</strong> modules, that deal with the interfaces for all the file formats.</p></li>
+<li><p>All <strong>style</strong> modules, such as <code class="docutils literal notranslate"><span class="pre">flake8</span></code>, to help you linter the code!</p></li>
+<li><p>All <strong>documentation</strong> modules, like <code class="docutils literal notranslate"><span class="pre">sphinx</span></code>, so that you can build the docs locally before submitting them.</p></li>
+<li><p>All <strong>test</strong> modules, like <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, in order for you to test your code locally before committing it!</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="check-your-installation">
+<h3>Check your installation!<a class="headerlink" href="#check-your-installation" title="Permalink to this headline">¶</a></h3>
+<p>Type the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">phys2bids</span><span class="o">/</span><span class="n">tests</span>
+<span class="n">pytest</span>
+</pre></div>
+</div>
+<p>This will execute the tests locally and check that your phys2bids installation works properly.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">pytest</span>
+<span class="o">===================================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===================================</span>
+platform win32 -- Python <span class="m">3</span>.8.6, pytest-6.1.1, py-1.9.0, pluggy-0.13.1
+rootdir: C:<span class="se">\U</span>sers<span class="se">\s</span>ento<span class="se">\p</span>hys2bids, configfile: setup.cfg
+plugins: cov-2.10.1
+collected <span class="m">61</span> items
+
+test_acq.py .                                                                        <span class="o">[</span>  <span class="m">1</span>%<span class="o">]</span>
+test_bids.py ................                                                        <span class="o">[</span> <span class="m">27</span>%<span class="o">]</span>
+test_integration.py ...                                                              <span class="o">[</span> <span class="m">32</span>%<span class="o">]</span>
+test_phys2bids.py ...                                                                <span class="o">[</span> <span class="m">37</span>%<span class="o">]</span>
+test_physio_obj.py .......                                                           <span class="o">[</span> <span class="m">49</span>%<span class="o">]</span>
+test_txt.py ..................                                                       <span class="o">[</span> <span class="m">78</span>%<span class="o">]</span>
+test_utils.py ...........                                                            <span class="o">[</span> <span class="m">96</span>%<span class="o">]</span>
+test_viz.py .x                                                                       <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">=================================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=================================</span>
+XFAIL test_viz.py::test_plot_trigger
+<span class="o">========================</span> <span class="m">60</span> passed, <span class="m">1</span> xfailed in <span class="m">142</span>.58s <span class="o">(</span><span class="m">0</span>:02:22<span class="o">)</span> <span class="o">========================</span>
+</pre></div>
+</div>
+<p>Do <strong>not</strong> worry if there is a xfail error in the log. This happens when we know that a test will fail for known reasons, and we are probably working to fix it (see <a class="reference external" href="https://docs.pytest.org/en/latest/skipping.html#xfail-mark-test-functions-as-expected-to-fail">here</a>. However, if you do encounter any other error, check that you have all the extra dependencies installed and their version meets <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> requirements. Contact us on <a class="reference external" href="https://gitter.im/physiopy/community">gitter</a> if you need help!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributorfile.html" class="btn btn-neutral float-right" title="How to contribute to physiopy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cli.html" class="btn btn-neutral float-left" title="Command-line usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

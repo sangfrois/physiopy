@@ -1,0 +1,12 @@
+phys2bids.interfaces.txt.populate_phys_input
+============================================
+
+.. currentmodule:: phys2bids.interfaces.txt
+
+.. autofunction:: populate_phys_input
+
+.. .. include:: modules/phys2bids.interfaces.txt.populate_phys_input.examples
+
+.. raw:: html
+
+    <div style='clear:both'></div>

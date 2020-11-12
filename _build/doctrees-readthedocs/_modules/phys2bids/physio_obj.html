@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>phys2bids.physio_obj &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="../../_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bids.html">Why use BIDS (for physiological data)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>phys2bids.physio_obj</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for phys2bids.physio_obj</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;I/O objects for phys2bids.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">groupby</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">LGR</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">var_type</span><span class="p">,</span> <span class="n">list_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check that the var is of a certain type.</span>
+
+<span class="sd">    If type is list and list_type is specified,</span>
+<span class="sd">    checks that the list contains list_type.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    var: any type</span>
+<span class="sd">        Variable to be checked.</span>
+<span class="sd">    var_type: type</span>
+<span class="sd">        Type the variable is assumed to be.</span>
+<span class="sd">    list_type: type</span>
+<span class="sd">        Like var_type, but applies to list elements.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    var: any type</span>
+<span class="sd">        Variable to be checked (same as input).</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If var is not of var_type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">var_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The given variable is not a </span><span class="si">{var_type}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">var_type</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">and</span> <span class="n">list_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">list_type</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">var</span>
+
+
+<span class="k">def</span> <span class="nf">has_size</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">data_size</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check that the var has the same dimension of the data.</span>
+
+<span class="sd">    If it&#39;s not the case, fill in the var or removes exceding var entry.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    var: list</span>
+<span class="sd">        Variable to be checked.</span>
+<span class="sd">    data_size: int</span>
+<span class="sd">        Size of data of interest.</span>
+<span class="sd">    token: same type as `var`</span>
+<span class="sd">        If `var` doesn&#39;t have as many elements as the data_size,</span>
+<span class="sd">        it will be padded at the end with this `token`.</span>
+<span class="sd">        It has to be the same type as var.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    var: list</span>
+<span class="sd">        Variable to be checked (same as input).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">data_size</span><span class="p">:</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span><span class="p">[:</span><span class="n">data_size</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">data_size</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">var</span> <span class="o">+</span> <span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">data_size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">var</span>
+
+
+<span class="k">def</span> <span class="nf">are_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return test of equality between two objects.</span>
+
+<span class="sd">    The equality is true if two objects are the same or</span>
+<span class="sd">    if one of the objects is equivalent to the dictionary</span>
+<span class="sd">    format of the other.</span>
+<span class="sd">    It&#39;s particularly written for Blueprint type objects.</span>
+<span class="sd">    This function might not work with other classes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    other:</span>
+<span class="sd">        comparable object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    boolean</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_deal_with_dict_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># Check if &quot;self&quot; has a &#39;timeseries&#39; key. If not, return False.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Check that the two objects have the same keys.</span>
+            <span class="c1"># If not, return False, otherwise loop through the timeseries key.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">alltrue_timeseries</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">])</span>
+                <span class="n">alltrue_keys</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;timeseries&#39;</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">])):</span>
+                            <span class="n">alltrue_timeseries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+                                                     <span class="o">==</span> <span class="n">other</span><span class="p">[</span><span class="s1">&#39;timeseries&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+                        <span class="n">alltrue_keys</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">alltrue_timeseries</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">alltrue_keys</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">other</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">alltrue_keys</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Try to compare the dictionary format of the two objects</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_deal_with_dict_value_error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="c1"># If there&#39;s an AttributeError, the other object might not be a class.</span>
+        <span class="c1"># Try to compare the dictionary format of self with the other object.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">==</span> <span class="n">other</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_deal_with_dict_value_error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c1"># If there&#39;s an AttributeError, self is not a class.</span>
+            <span class="c1"># Try to compare self with the dictionary format of the other object.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_deal_with_dict_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="c1"># If there&#39;s an AttributeError, both objects are not a class.</span>
+                <span class="c1"># Try to compare self with the two object.</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">_deal_with_dict_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BlueprintInput"><a class="viewcode-back" href="../../generated/phys2bids.physio_obj.BlueprintInput.html#phys2bids.physio_obj.BlueprintInput">[docs]</a><span class="k">class</span> <span class="nc">BlueprintInput</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main input object for phys2bids.</span>
+
+<span class="sd">    Contains the blueprint to be populated.</span>
+<span class="sd">    !!! Pay attention: there&#39;s rules on how to populate this object.</span>
+<span class="sd">    See below (&quot;Attention&quot;) !!!</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    timeseries : (ch, [tps]) list</span>
+<span class="sd">        List of numpy 1d arrays - one for channel, plus one for time.</span>
+<span class="sd">        Time channel has to be the first.</span>
+<span class="sd">        Contains all the timeseries recorded.</span>
+<span class="sd">        Supports different frequencies!</span>
+<span class="sd">    freq : (ch) list of floats</span>
+<span class="sd">        List of floats - one per channel.</span>
+<span class="sd">        Contains all the frequencies of the recorded channel.</span>
+<span class="sd">        Support different frequencies!</span>
+<span class="sd">    ch_name : (ch) list of strings</span>
+<span class="sd">        List of names of the channels - can be the header of the columns</span>
+<span class="sd">        in the output files.</span>
+<span class="sd">    units : (ch) list of strings</span>
+<span class="sd">        List of the units of the channels.</span>
+<span class="sd">    trigger_idx : int</span>
+<span class="sd">        The trigger index. Optional. Default is 0.</span>
+<span class="sd">    num_timepoints_found: int or None</span>
+<span class="sd">        Amount of timepoints found in the automatic count.</span>
+<span class="sd">        This is initialised as &quot;None&quot; and then computed internally,</span>
+<span class="sd">        *if* check_trigger_amount() is run.</span>
+<span class="sd">    thr: float or None</span>
+<span class="sd">        Threshold used by check_trigger_amount() to detect trigger points.</span>
+<span class="sd">        This is initialised as &quot;None&quot; and then computed internally,</span>
+<span class="sd">        *if* check_trigger_amount() is run.</span>
+<span class="sd">    time_offset: float</span>
+<span class="sd">        Time offset found by check_trigger_amount().</span>
+<span class="sd">        This is initialised as 0 and then computed internally,</span>
+<span class="sd">        *if* check_trigger_amount() is run.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    ch_amount:</span>
+<span class="sd">        Property. Returns number of channels (ch).</span>
+<span class="sd">    rename_channels:</span>
+<span class="sd">        Changes the list &quot;ch_name&quot; in a controlled way.</span>
+<span class="sd">    return_index:</span>
+<span class="sd">        Returns the proper list entry of all the</span>
+<span class="sd">        properties of the object, given an index.</span>
+<span class="sd">    delete_at_index:</span>
+<span class="sd">        Returns all the proper list entry of the</span>
+<span class="sd">        properties of the object, given an index.</span>
+<span class="sd">    check_trigger_amount:</span>
+<span class="sd">        Counts the amounts of triggers and corrects time offset</span>
+<span class="sd">        in &quot;time&quot; ndarray. Also adds property ch_amount.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The timeseries (and as a consequence, all the other properties)</span>
+<span class="sd">    should start with an entry for time.</span>
+<span class="sd">    It should have the same length of the trigger - hence same sampling.</span>
+<span class="sd">    Meaning:</span>
+<span class="sd">    - timeseries[0] → ndarray representing time</span>
+<span class="sd">    - timeseries[chtrig] → ndarray representing trigger</span>
+<span class="sd">    - timeseries[0].shape == timeseries[chtrig].shape</span>
+
+<span class="sd">    As a consequence:</span>
+<span class="sd">    - freq[0] == freq[chtrig]</span>
+<span class="sd">    - ch_name[0] = &#39;time&#39;</span>
+<span class="sd">    - units[0] = &#39;s&#39;</span>
+<span class="sd">    - Actual number of channels +1 &lt;= ch_amount</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ch_name</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">trigger_idx</span><span class="p">,</span>
+                 <span class="n">num_timepoints_found</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise BlueprintInput (see class docstring).&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">timeseries</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">list_type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">is_valid</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span>
+                                      <span class="n">list_type</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">ch_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="s1">&#39;[]&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">trigger_idx</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_timepoints_found</span> <span class="o">=</span> <span class="n">num_timepoints_found</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thr</span> <span class="o">=</span> <span class="n">thr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_offset</span> <span class="o">=</span> <span class="n">time_offset</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ch_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property. Return number of channels (ch).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Number of channels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the object with a sliced version of self.timeseries.</span>
+
+<span class="sd">        The slicing is based on the trigger. If necessary, computes a sort of</span>
+<span class="sd">        interpolation to get the right index in multifreq.</span>
+<span class="sd">        If the trigger was not specified, the slicing is based on the time instead.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx: int, tuple of int or slicer</span>
+<span class="sd">            indexes to use to slice the timeseries.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        BlueprintInput object</span>
+<span class="sd">            a copy of the object with the part of timeseries expressed by idx.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IndexError</span>
+<span class="sd">            If the idx, represented as a slice, is out of bounds.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        If idx is an integer, it returns an instantaneous moment for all channels.</span>
+<span class="sd">        If it&#39;s a slice, it always returns the full slice. This means that</span>
+<span class="sd">        potentially, depending on the frequencies, BlueprintInput[1] and</span>
+<span class="sd">        BlueprintInput[1:2] might return different results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sliced_timeseries</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span>
+        <span class="n">return_instant</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">trigger_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span><span class="p">])</span>
+
+        <span class="c1"># If idx is an integer, return an &quot;instantaneous slice&quot; and initialise slice</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">return_instant</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># If idx is a negative integer, take the idx element from the end.</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">trigger_length</span> <span class="o">+</span> <span class="n">idx</span>
+
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># If idx.start or stop are None, make them 0 or trigger length.</span>
+        <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">stop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">trigger_length</span><span class="p">)</span>
+
+        <span class="c1"># Check that the indexes are not out of bounds</span>
+        <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">trigger_length</span> <span class="ow">or</span> <span class="n">idx</span><span class="o">.</span><span class="n">stop</span> <span class="o">&gt;</span> <span class="n">trigger_length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Slice (</span><span class="si">{idx.start}</span><span class="s1">, </span><span class="si">{idx.stop}</span><span class="s1">) is out of &#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;bounds for channel </span><span class="si">{self.trigger_idx}</span><span class="s1"> &#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;with size </span><span class="si">{trigger_length}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Operate on each channel on its own</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">):</span>
+            <span class="n">idx_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">idx</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">:</span> <span class="n">idx</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">idx</span><span class="o">.</span><span class="n">step</span><span class="p">}</span>
+            <span class="c1"># Adapt the slicing indexes to the right requency</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">idx_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">idx_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+                                               <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span><span class="p">]</span>
+                                               <span class="o">*</span> <span class="n">idx_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+            <span class="c1"># Correct the slicing stop if necessary</span>
+            <span class="k">if</span> <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">return_instant</span><span class="p">:</span>
+                <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">trigger_length</span> <span class="o">==</span> <span class="n">idx</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+                <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+
+            <span class="n">new_idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">],</span> <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">],</span> <span class="n">idx_dict</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">])</span>
+            <span class="n">sliced_timeseries</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">channel</span><span class="p">[</span><span class="n">new_idx</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">BlueprintInput</span><span class="p">(</span><span class="n">sliced_timeseries</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">num_timepoints_found</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">thr</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">time_offset</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return test of equality between two objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other:</span>
+<span class="sd">            comparable object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">are_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rename_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_names</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rename the channels.</span>
+
+<span class="sd">        If &#39;time&#39; was specified, it makes sure that it&#39;s the first entry.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        new_names: list of str</span>
+<span class="sd">            New names for channels.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Outcome:</span>
+<span class="sd">        self.ch_name: list of str</span>
+<span class="sd">            Changes content to new_name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;time&#39;</span> <span class="ow">in</span> <span class="n">new_names</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">new_names</span><span class="p">[</span><span class="n">new_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)]</span>
+
+        <span class="n">new_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="p">]</span> <span class="o">+</span> <span class="n">new_names</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">is_valid</span><span class="p">(</span><span class="n">new_names</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">list_type</span><span class="o">=</span><span class="nb">str</span><span class="p">),</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the list entries of all the object properties, given an index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx: int</span>
+<span class="sd">            Index of elements to return</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        out: tuple</span>
+<span class="sd">            Tuple containing the proper list entry of all the</span>
+<span class="sd">            properties of the object with index `idx`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">delete_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete the list entries of the object properties, given their index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx: int or range</span>
+<span class="sd">            Index of elements to delete from all lists</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Outcome:</span>
+<span class="sd">        self.timeseries:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.freq:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.ch_name:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.units:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.trigger_idx:</span>
+<span class="sd">            If the deleted index was the one of the trigger, set the trigger idx to 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span> <span class="o">==</span> <span class="n">idx</span><span class="p">:</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Removing trigger channel - are you sure you are doing&#39;</span>
+                        <span class="s1">&#39;the right thing?&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">check_trigger_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_timepoints_expected</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tr</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count trigger points and correct time offset in channel &quot;time&quot;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        thr: float</span>
+<span class="sd">            Threshold to be used to detect trigger points.</span>
+<span class="sd">            Default is 2.5</span>
+<span class="sd">        num_timepoints_expected: int</span>
+<span class="sd">            Number of expected triggers (num of TRs in fMRI)</span>
+<span class="sd">        tr: float</span>
+<span class="sd">            The Repetition Time of the fMRI data.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Outcome:</span>
+<span class="sd">        self.thr: float</span>
+<span class="sd">            Threshold used by the function to detect trigger points.</span>
+<span class="sd">        self.num_timepoints_found: int</span>
+<span class="sd">            Property of the `BlueprintInput` class.</span>
+<span class="sd">            Contains the number of timepoints found</span>
+<span class="sd">            with the automatic estimation.</span>
+<span class="sd">        self.timeseries:</span>
+<span class="sd">            The property `timeseries` is shifted with the 0 being</span>
+<span class="sd">            the time of first trigger.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Counting trigger points&#39;</span><span class="p">)</span>
+        <span class="c1"># Use the trigger channel to find the TRs,</span>
+        <span class="c1"># comparing it to a given threshold.</span>
+        <span class="n">trigger</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">trigger_idx</span><span class="p">]</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The trigger is in channel </span><span class="si">{self.trigger_idx}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># Check that trigger and time channels have the same length.</span>
+        <span class="c1"># If not, resample time to the length of the trigger</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trigger</span><span class="p">):</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The trigger channel has a different sampling &#39;</span>
+                        <span class="s1">&#39;from the registered time. Using a resampled version &#39;</span>
+                        <span class="s1">&#39;of time to find the starting time.&#39;</span><span class="p">)</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">trigger</span><span class="p">))</span>
+
+        <span class="c1"># Check if thr was given, if not &quot;guess&quot; it.</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">thr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">thr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trigger</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">trigger</span><span class="p">)</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">timepoints</span> <span class="o">=</span> <span class="n">trigger</span> <span class="o">&gt;</span> <span class="n">thr</span>
+        <span class="n">num_timepoints_found</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">is_true</span> <span class="k">for</span> <span class="n">is_true</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="n">timepoints</span><span class="p">,</span>
+                                    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_true</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The number of timepoints according to the std_thr method &#39;</span>
+                     <span class="n">f</span><span class="s1">&#39;is </span><span class="si">{num_timepoints_found}</span><span class="s1">. The computed threshold is </span><span class="si">{thr:.4f}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The number of timepoints found with the manual threshold of </span><span class="si">{thr:.4f}</span><span class="s1"> &#39;</span>
+                     <span class="n">f</span><span class="s1">&#39;is </span><span class="si">{num_timepoints_found}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">time_offset</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">timepoints</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
+
+        <span class="k">if</span> <span class="n">num_timepoints_expected</span><span class="p">:</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Checking number of timepoints&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">num_timepoints_found</span> <span class="o">&gt;</span> <span class="n">num_timepoints_expected</span><span class="p">:</span>
+                <span class="n">timepoints_extra</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_timepoints_found</span>
+                                    <span class="o">-</span> <span class="n">num_timepoints_expected</span><span class="p">)</span>
+                <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Found </span><span class="si">{timepoints_extra}</span><span class="s1"> timepoints&#39;</span>
+                            <span class="s1">&#39; more than expected!</span><span class="se">\n</span><span class="s1">&#39;</span>
+                            <span class="s1">&#39;Assuming extra timepoints are at the end &#39;</span>
+                            <span class="s1">&#39;(try again with a more liberal thr)&#39;</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">num_timepoints_found</span> <span class="o">&lt;</span> <span class="n">num_timepoints_expected</span><span class="p">:</span>
+                <span class="n">timepoints_missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_timepoints_expected</span>
+                                      <span class="o">-</span> <span class="n">num_timepoints_found</span><span class="p">)</span>
+                <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Found </span><span class="si">{timepoints_missing}</span><span class="s1"> timepoints&#39;</span>
+                            <span class="s1">&#39; less than expected!&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tr</span><span class="p">:</span>
+                    <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Correcting time offset, assuming missing &#39;</span>
+                                <span class="s1">&#39;timepoints are at the beginning (try again &#39;</span>
+                                <span class="s1">&#39;with a more conservative thr)&#39;</span><span class="p">)</span>
+                    <span class="n">time_offset</span> <span class="o">-=</span> <span class="p">(</span><span class="n">timepoints_missing</span> <span class="o">*</span> <span class="n">tr</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Can</span><span class="se">\&#39;</span><span class="s1">t correct time offset - you should &#39;</span>
+                                <span class="s1">&#39;specify the TR&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Found just the right amount of timepoints!&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LGR</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The necessary options to find the amount of timepoints &#39;</span>
+                        <span class="s1">&#39;were not provided.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thr</span> <span class="o">=</span> <span class="n">thr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_offset</span> <span class="o">=</span> <span class="n">time_offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">time_offset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_timepoints_found</span> <span class="o">=</span> <span class="n">num_timepoints_found</span>
+
+    <span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print info on the file, channel by channel.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename: str or path</span>
+<span class="sd">            Name of the input file to phys2bids</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Outcome:</span>
+<span class="sd">        ch:</span>
+<span class="sd">            Returns to stdout (e.g. on screen) channels,</span>
+<span class="sd">            their names and their sampling rate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">------------------------------------------------&#39;</span>
+                <span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">File </span><span class="si">{filename}</span><span class="s1"> contains:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">):</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">info</span> <span class="o">+</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{ch:02d}</span><span class="s1">. </span><span class="si">{self.ch_name[ch]}</span><span class="s1">;&#39;</span>
+                           <span class="n">f</span><span class="s1">&#39; sampled at </span><span class="si">{self.freq[ch]}</span><span class="s1"> Hz</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;------------------------------------------------</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="n">LGR</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">info</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlueprintOutput"><a class="viewcode-back" href="../../generated/phys2bids.physio_obj.BlueprintOutput.html#phys2bids.physio_obj.BlueprintOutput">[docs]</a><span class="k">class</span> <span class="nc">BlueprintOutput</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main output object for phys2bids.</span>
+
+<span class="sd">    Contains the blueprint to be exported.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    timeseries : (ch x tps) :obj:`numpy.ndarray`</span>
+<span class="sd">        Numpy 2d array of timeseries</span>
+<span class="sd">        Contains all the timeseries recorded.</span>
+<span class="sd">        Impose same frequency!</span>
+<span class="sd">    freq : float</span>
+<span class="sd">        Shared frequency of the object.</span>
+<span class="sd">            Properties</span>
+<span class="sd">    ch_name : (ch) list of strings</span>
+<span class="sd">        List of names of the channels - can be the header of the columns</span>
+<span class="sd">        in the output files.</span>
+<span class="sd">    units : (ch) list of strings</span>
+<span class="sd">        List of the units of the channels.</span>
+<span class="sd">    start_time : float</span>
+<span class="sd">        Starting time of acquisition (equivalent to first TR,</span>
+<span class="sd">        or to the opposite sign of the time offset).</span>
+<span class="sd">    filename : string</span>
+<span class="sd">        Filename the object will be saved with. Init as empty string</span>
+
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    ch_amount:</span>
+<span class="sd">        Property. Returns number of channels (ch).</span>
+<span class="sd">    return_index:</span>
+<span class="sd">        Returns the proper list entry of all the</span>
+<span class="sd">        properties of the object, given an index.</span>
+<span class="sd">    delete_at_index:</span>
+<span class="sd">        Returns all the proper list entry of the</span>
+<span class="sd">        properties of the object, given an index.</span>
+<span class="sd">    init_from_blueprint:</span>
+<span class="sd">        method to populate from input blueprint instead of init</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ch_name</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise BlueprintOutput (see class docstring).&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">ch_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">has_size</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="s1">&#39;[]&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">start_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">is_valid</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ch_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property. Returns number of channels (ch).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Number of channels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return test of equality between two objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other:</span>
+<span class="sd">            comparable object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">are_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">return_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the list entries of all the object properties, given an index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx: int</span>
+<span class="sd">            Index of elements to return</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        out: tuple</span>
+<span class="sd">            Tuple containing the proper list entry of all the</span>
+<span class="sd">            properties of the object with index `idx`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_amount</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete the list entries of the object properties, given their index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx: int or range</span>
+<span class="sd">            Index of elements to delete from all lists</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Outcome:</span>
+<span class="sd">        self.timeseries:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.ch_name:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.units:</span>
+<span class="sd">            Removes element at index idx</span>
+<span class="sd">        self.ch_amount:</span>
+<span class="sd">            In all the property that are lists, the element correspondent to</span>
+<span class="sd">            `idx` gets deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">ch_name</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">init_from_blueprint</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">blueprint</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Populate the output blueprint using BlueprintInput.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cls: :obj: `BlueprintOutput`</span>
+<span class="sd">            The object on which to operate</span>
+<span class="sd">        blueprint: :obj: `BlueprintInput`</span>
+<span class="sd">            The input blueprint object.</span>
+<span class="sd">            !!! All its frequencies should be the same !!!</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        cls: :obj: `BlueprintOutput`</span>
+<span class="sd">            Populated `BlueprintOutput` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">timeseries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">blueprint</span><span class="o">.</span><span class="n">timeseries</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ch_name</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">ch_name</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="n">blueprint</span><span class="o">.</span><span class="n">units</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ch_name</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">start_time</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

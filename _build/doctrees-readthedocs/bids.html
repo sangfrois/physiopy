@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Why use BIDS (for physiological data)? &mdash; phys2bids 2.2.3+108.gb965b03 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/phys2bids_logo2000x400.png"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/chrisfilo/zenodo.js/v0.1/zenodo.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command-line usage" href="cli.html" />
+    <link rel="prev" title="Best Practices for Collecting Physiological Data" href="bestpractice.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> phys2bids
+          
+
+          
+            
+            <img src="_static/phys2bids_logo2000x400.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.3+108.gb965b03
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristic.html">How to set up a heuristic file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractice.html">Best Practices for Collecting Physiological Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Why use BIDS (for physiological data)?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-bids">What is BIDS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-bids">Why use BIDS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beyond-phys2bids">Beyond <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributorfile.html">How to contribute to <code class="docutils literal notranslate"><span class="pre">physiopy</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Physiopy Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phys2bids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Why use BIDS (for physiological data)?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/physiopy/phys2bids/blob/master/docs/bids.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="why-use-bids-for-physiological-data">
+<span id="bids"></span><h1>Why use BIDS (for physiological data)?<a class="headerlink" href="#why-use-bids-for-physiological-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-bids">
+<h2>What is BIDS?<a class="headerlink" href="#what-is-bids" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://bids.neuroimaging.io">Brain Imaging Data Standard (BIDS)</a> is the most commonly used standard for organizing neuroimaging data.
+Originally introduced in 2016 by <a class="reference external" href="https://www.nature.com/articles/sdata201644">Gorgolewski et al.</a>, BIDS quickly gained popularity, driven largely by the development of downstream <a class="reference external" href="https://bids-apps.neuroimaging.io/">BIDS-Apps</a> and the standard’s mandated use in popular data-sharing repositories like <a class="reference external" href="https://openneuro.org">OpenNeuro</a>.
+Since then, the standard has evolved to accommodate additional data modalities and support new extensions (refer to <a class="reference external" href="https://bids-specification.readthedocs.io/en/stable/">this site</a> for the current version).</p>
+<p>At its core, BIDS simply provides a few conventions for how to organize and name directories and data files.
+These naming conventions rely on heuristic key-value pairs, such that they are both human- and machine-readable.
+Most data files are accompanied by a JSON “sidecar,” which provides additional information on the data stored within its partner file.
+This relatively lightweight structure makes BIDS incredibly powerful and, importantly, easy to adopt!</p>
+</div>
+<div class="section" id="why-use-bids">
+<h2>Why use BIDS?<a class="headerlink" href="#why-use-bids" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> was originally designed by neuroscientists who wanted to examine the relationship between physiology and brain function (see <a class="reference internal" href="bestpractice.html#bestpractice"><span class="std std-ref">Best Practices for Collecting Physiological Data</span></a> for more information on why this is important).
+Given the preponderance of physiological data formats—which can vary dramatically across acquisition platforms and software—there was no singular software package that could readily accommodate <em>any</em> data file thrown at it.
+That is, the lack of a standardized data format, and software that made it easy to convert files to that format, seemed to us to be a major limiting factor in the physiological research community.</p>
+<p>To attempt to remedy this we decided to rely on BIDS, which had <a class="reference external" href="https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/06-physiological-and-other-continuous-recordings.html">conventions for physiological data</a> built in since its initial release.
+Though the physiological conventions of BIDS are obviously designed to complement neuroimaging data collection, it is by no means required!
+Nonetheless, we believe that it is currently the best option for the field.</p>
+</div>
+<div class="section" id="beyond-phys2bids">
+<h2>Beyond <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code><a class="headerlink" href="#beyond-phys2bids" title="Permalink to this headline">¶</a></h2>
+<p>In our minds, the data format provided by BIDS will allow for the development of robust, community-driven software for working with physiological data.
+That is, <code class="docutils literal notranslate"><span class="pre">phys2bids</span></code> is merely the first step of what will hopefully become a more comprehensive software suite.
+For more on these development, continue to check in on the <a class="reference external" href="https://github.com/physiopy">physiopy organization</a> on GitHub.
+New contributors are always welcome!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cli.html" class="btn btn-neutral float-right" title="Command-line usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bestpractice.html" class="btn btn-neutral float-left" title="Best Practices for Collecting Physiological Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, the phys2bids developers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
